@@ -1,0 +1,2388 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<meta name="theme-color" content="#2D6A4F"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Saleh Deutsch"/>
+<meta name="description" content="یادگیری زبان آلمانی از سطح B1 به بالا با ترجمه فارسی"/>
+<link rel="manifest" href="manifest.json"/>
+<title>Saleh Deutsch | یادگیری آلمانی</title>
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN SYSTEM — Educational Psychology
+   Forest green palette: growth, calm focus
+   Warm amber accent: attention, energy
+   Off-white bg: easy on eyes (no pure white)
+═══════════════════════════════════════════ */
+:root {
+  --c-primary:    #2D6A4F;
+  --c-primary-d:  #1B4332;
+  --c-primary-l:  #52B788;
+  --c-accent:     #F4A261;
+  --c-accent-d:   #E76F51;
+  --c-info:       #457B9D;
+  --c-success:    #40916C;
+  --c-warn:       #E9C46A;
+  --c-danger:     #E63946;
+
+  --bg:           #F4F7F5;
+  --bg-card:      #FFFFFF;
+  --bg-nav:       #FFFFFF;
+  --bg-input:     #EEF2EF;
+  --bg-chip:      #D8EDDF;
+
+  --txt:          #1A2E20;
+  --txt-2:        #4A6357;
+  --txt-3:        #7A9B8A;
+  --txt-inv:      #FFFFFF;
+
+  --border:       #D4E8DB;
+  --shadow:       0 2px 12px rgba(45,106,79,.10);
+  --shadow-md:    0 4px 20px rgba(45,106,79,.15);
+  --shadow-lg:    0 8px 32px rgba(45,106,79,.20);
+
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-xl: 32px;
+
+  --nav-h: 68px;
+  --header-h: 60px;
+
+  --font-fa: 'Segoe UI', Tahoma, 'Noto Sans Arabic', sans-serif;
+  --font-de: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --anim: 240ms cubic-bezier(.4,0,.2,1);
+}
+
+[data-theme="dark"] {
+  --bg:        #0D1F17;
+  --bg-card:   #1A3528;
+  --bg-nav:    #142B1F;
+  --bg-input:  #1F3D2C;
+  --bg-chip:   #1B4332;
+
+  --txt:       #E8F5EE;
+  --txt-2:     #9DC9B3;
+  --txt-3:     #5E8B74;
+  --txt-inv:   #0D1F17;
+
+  --border:    #2D5040;
+  --shadow:    0 2px 12px rgba(0,0,0,.35);
+  --shadow-md: 0 4px 20px rgba(0,0,0,.45);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,.55);
+}
+
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{
+  font-family:var(--font-fa);
+  background:var(--bg);
+  color:var(--txt);
+  transition:background var(--anim),color var(--anim);
+  overscroll-behavior:none;
+}
+button{cursor:pointer;border:none;background:none;font-family:inherit;color:inherit}
+input{font-family:inherit}
+a{text-decoration:none;color:inherit}
+
+/* ── App Shell ── */
+#app{
+  display:flex;
+  flex-direction:column;
+  height:100dvh;
+  max-width:480px;
+  margin:0 auto;
+  position:relative;
+  overflow:hidden;
+}
+
+/* ── Header ── */
+.app-header{
+  height:var(--header-h);
+  background:var(--bg-card);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 16px;
+  flex-shrink:0;
+  z-index:10;
+  transition:background var(--anim);
+}
+.header-title{
+  font-size:18px;
+  font-weight:700;
+  color:var(--c-primary);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.header-title .de{
+  font-family:var(--font-de);
+  font-size:14px;
+  color:var(--txt-3);
+  font-weight:400;
+}
+.header-actions{display:flex;gap:8px;align-items:center}
+.icon-btn{
+  width:38px;height:38px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;
+  background:var(--bg-input);
+  transition:background var(--anim),transform .15s;
+}
+.icon-btn:active{transform:scale(.92)}
+
+/* ── Page Content ── */
+.page-content{
+  flex:1;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:calc(var(--nav-h) + 12px);
+  scroll-behavior:smooth;
+}
+.page-content::-webkit-scrollbar{width:3px}
+.page-content::-webkit-scrollbar-thumb{background:var(--c-primary-l);border-radius:4px}
+
+/* ── Bottom Nav ── */
+.bottom-nav{
+  height:var(--nav-h);
+  background:var(--bg-nav);
+  border-top:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-around;
+  flex-shrink:0;
+  padding-bottom:env(safe-area-inset-bottom);
+  z-index:10;
+  transition:background var(--anim);
+}
+.nav-item{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:3px;
+  padding:8px 4px;
+  border-radius:var(--r-sm);
+  transition:color var(--anim);
+  color:var(--txt-3);
+  position:relative;
+}
+.nav-item.active{color:var(--c-primary)}
+.nav-item .nav-icon{
+  font-size:22px;
+  transition:transform .2s;
+}
+.nav-item.active .nav-icon{transform:scale(1.15)}
+.nav-item .nav-label{
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.3px;
+}
+.nav-item .nav-pip{
+  position:absolute;
+  top:6px;
+  right:calc(50% - 14px);
+  width:7px;height:7px;
+  background:var(--c-accent);
+  border-radius:50%;
+  display:none;
+}
+.nav-item.has-pip .nav-pip{display:block}
+
+/* ── Cards ── */
+.card{
+  background:var(--bg-card);
+  border-radius:var(--r-md);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  transition:background var(--anim),box-shadow .2s,transform .15s;
+}
+.card:active{transform:scale(.985)}
+
+/* ── Buttons ── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 20px;
+  border-radius:var(--r-md);
+  font-size:14px;font-weight:600;
+  transition:all .15s;
+  cursor:pointer;
+}
+.btn:active{transform:scale(.95)}
+.btn-primary{background:var(--c-primary);color:#fff}
+.btn-primary:hover{background:var(--c-primary-d)}
+.btn-accent{background:var(--c-accent);color:#fff}
+.btn-outline{background:transparent;border:1.5px solid var(--c-primary);color:var(--c-primary)}
+.btn-ghost{background:var(--bg-input);color:var(--txt-2)}
+.btn-sm{padding:8px 14px;font-size:13px;border-radius:var(--r-sm)}
+.btn-full{width:100%}
+
+/* ── Chips / Badges ── */
+.chip{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:12px;font-weight:600;
+  background:var(--bg-chip);
+  color:var(--c-primary);
+}
+.chip.b1{background:#D8EDDF;color:#1B5E35}
+.chip.b2{background:#D6E4F0;color:#1A3F5C}
+.chip.c1{background:#FCE8D5;color:#7A3010}
+.chip.c2{background:#F5D5E0;color:#7A1030}
+.chip.hoch{background:#E8F4FF;color:#1A4A7A}
+.chip.umgang{background:#FFF3E0;color:#7A4A00}
+.chip.fahr{background:#E8F5E9;color:#1B5E20}
+
+/* ── Sections ── */
+.section{padding:16px 16px 0}
+.section-title{
+  font-size:13px;font-weight:700;
+  color:var(--txt-3);
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.section-title::after{
+  content:'';flex:1;
+  height:1px;background:var(--border);
+}
+
+/* ── Progress Bar ── */
+.prog-bar{
+  height:6px;background:var(--bg-input);
+  border-radius:10px;overflow:hidden;
+}
+.prog-fill{
+  height:100%;background:var(--c-primary-l);
+  border-radius:10px;
+  transition:width .6s cubic-bezier(.4,0,.2,1);
+}
+.prog-fill.accent{background:var(--c-accent)}
+.prog-fill.info{background:var(--c-info)}
+
+/* ── Level Badge ── */
+.level-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;
+  background:var(--c-primary);
+  color:#fff;
+  border-radius:20px;
+  font-size:13px;font-weight:700;
+  font-family:var(--font-de);
+  letter-spacing:.5px;
+}
+
+/* ── Stat Card ── */
+.stat-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  padding:16px;
+}
+.stat-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--r-md);
+  padding:14px;
+  display:flex;flex-direction:column;gap:6px;
+  box-shadow:var(--shadow);
+}
+.stat-icon{font-size:22px}
+.stat-value{font-size:24px;font-weight:800;color:var(--c-primary);font-family:var(--font-de)}
+.stat-label{font-size:12px;color:var(--txt-3);font-weight:500}
+
+/* ── Category Grid ── */
+.cat-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  padding:0 16px 16px;
+}
+.cat-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--r-md);
+  padding:16px;
+  display:flex;flex-direction:column;gap:10px;
+  box-shadow:var(--shadow);
+  cursor:pointer;
+  transition:all .2s;
+  position:relative;
+  overflow:hidden;
+}
+.cat-card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--cat-color,var(--c-primary));
+}
+.cat-card:active{transform:scale(.96);box-shadow:var(--shadow-md)}
+.cat-emoji{font-size:28px}
+.cat-name{font-size:14px;font-weight:700;color:var(--txt)}
+.cat-de{font-size:11px;color:var(--txt-3);font-family:var(--font-de)}
+.cat-count{font-size:12px;color:var(--txt-3)}
+.cat-prog{margin-top:4px}
+
+/* ── Streak Banner ── */
+.streak-banner{
+  margin:16px;
+  background:linear-gradient(135deg,var(--c-primary-d),var(--c-primary));
+  border-radius:var(--r-lg);
+  padding:20px;
+  color:#fff;
+  display:flex;align-items:center;gap:16px;
+  box-shadow:var(--shadow-md);
+}
+.streak-flame{font-size:44px;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.streak-info{}
+.streak-num{font-size:36px;font-weight:900;line-height:1;font-family:var(--font-de)}
+.streak-label{font-size:13px;opacity:.85;margin-top:2px}
+.streak-sub{font-size:11px;opacity:.65;margin-top:4px}
+
+/* ── Today Goal ── */
+.goal-card{
+  margin:0 16px 16px;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--r-md);
+  padding:16px;
+  box-shadow:var(--shadow);
+}
+.goal-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.goal-title{font-size:14px;font-weight:700}
+.goal-count{font-size:13px;font-weight:700;color:var(--c-primary);font-family:var(--font-de)}
+
+/* ── Quick Access ── */
+.quick-row{
+  display:flex;gap:10px;
+  padding:0 16px 16px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.quick-row::-webkit-scrollbar{display:none}
+.quick-btn{
+  flex-shrink:0;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--r-md);
+  padding:14px 18px;
+  box-shadow:var(--shadow);
+  cursor:pointer;
+  transition:all .15s;
+  min-width:80px;
+}
+.quick-btn:active{transform:scale(.94)}
+.quick-btn .q-icon{font-size:26px}
+.quick-btn .q-label{font-size:11px;font-weight:600;color:var(--txt-2)}
+
+/* ── Tab Bar (secondary) ── */
+.tab-bar{
+  display:flex;
+  gap:8px;
+  padding:12px 16px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab-pill{
+  flex-shrink:0;
+  padding:8px 16px;
+  border-radius:20px;
+  font-size:13px;font-weight:600;
+  background:var(--bg-input);
+  color:var(--txt-2);
+  cursor:pointer;
+  transition:all .15s;
+  font-family:var(--font-de);
+}
+.tab-pill.active{
+  background:var(--c-primary);
+  color:#fff;
+}
+.tab-pill:active{transform:scale(.94)}
+
+/* ── Toast ── */
+.toast{
+  position:fixed;
+  bottom:calc(var(--nav-h) + 16px);
+  left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--c-primary-d);
+  color:#fff;
+  padding:10px 20px;
+  border-radius:20px;
+  font-size:13px;font-weight:600;
+  opacity:0;
+  transition:all .3s;
+  z-index:999;
+  white-space:nowrap;
+  pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── Search Bar ── */
+.search-wrap{padding:12px 16px}
+.search-bar{
+  display:flex;align-items:center;gap:10px;
+  background:var(--bg-input);
+  border:1.5px solid transparent;
+  border-radius:var(--r-md);
+  padding:10px 14px;
+  transition:border-color .2s;
+}
+.search-bar:focus-within{border-color:var(--c-primary-l)}
+.search-bar input{
+  flex:1;background:none;border:none;outline:none;
+  font-size:14px;color:var(--txt);
+  direction:auto;
+}
+.search-bar input::placeholder{color:var(--txt-3)}
+.search-icon{font-size:18px;color:var(--txt-3)}
+
+/* ── Page Transitions ── */
+.page{display:none;flex-direction:column;flex:1;overflow:hidden}
+.page.active{display:flex;animation:fadeSlide .22s ease-out}
+@keyframes fadeSlide{
+  from{opacity:0;transform:translateY(6px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ── Empty State ── */
+.empty-state{
+  display:flex;flex-direction:column;align-items:center;
+  padding:48px 24px;gap:12px;
+  color:var(--txt-3);text-align:center;
+}
+.empty-state .e-icon{font-size:48px}
+.empty-state .e-title{font-size:16px;font-weight:700;color:var(--txt-2)}
+.empty-state .e-sub{font-size:13px;line-height:1.6}
+
+/* ── Settings Page ── */
+.setting-group{padding:0 16px 16px}
+.setting-group-title{
+  font-size:11px;font-weight:700;letter-spacing:.8px;
+  color:var(--txt-3);text-transform:uppercase;
+  padding:16px 0 8px;
+}
+.setting-row{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--r-md);
+  overflow:hidden;
+  margin-bottom:8px;
+}
+.setting-item{
+  display:flex;align-items:center;
+  padding:14px 16px;
+  gap:12px;
+  border-bottom:1px solid var(--border);
+}
+.setting-item:last-child{border-bottom:none}
+.s-icon{font-size:20px;width:28px;text-align:center}
+.s-info{flex:1}
+.s-label{font-size:14px;font-weight:600}
+.s-sub{font-size:12px;color:var(--txt-3);margin-top:2px}
+.s-ctrl{display:flex;align-items:center}
+
+/* Toggle Switch */
+.toggle{position:relative;width:44px;height:24px}
+.toggle input{opacity:0;width:0;height:0}
+.toggle-track{
+  position:absolute;inset:0;
+  background:var(--bg-input);
+  border-radius:20px;
+  transition:background .2s;
+  cursor:pointer;
+}
+.toggle-track::after{
+  content:'';
+  position:absolute;top:3px;left:3px;
+  width:18px;height:18px;
+  background:#fff;border-radius:50%;
+  transition:transform .2s;
+  box-shadow:0 1px 4px rgba(0,0,0,.2);
+}
+.toggle input:checked + .toggle-track{background:var(--c-primary)}
+.toggle input:checked + .toggle-track::after{transform:translateX(20px)}
+
+/* Select */
+.s-select{
+  background:var(--bg-input);
+  border:1.5px solid var(--border);
+  border-radius:var(--r-sm);
+  padding:6px 10px;
+  font-size:13px;font-weight:600;
+  color:var(--txt);
+  cursor:pointer;
+  font-family:var(--font-de);
+}
+
+/* ── Progress Page ── */
+.prog-page{padding:16px}
+.prog-section-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--r-md);
+  padding:16px;
+  margin-bottom:12px;
+  box-shadow:var(--shadow);
+}
+.prog-section-title{
+  font-size:14px;font-weight:700;margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.big-num{
+  font-size:48px;font-weight:900;
+  color:var(--c-primary);
+  font-family:var(--font-de);
+  line-height:1;
+}
+.prog-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.prog-row-label{font-size:12px;color:var(--txt-2);width:80px;flex-shrink:0;text-align:right}
+.prog-row-bar{flex:1}
+.prog-row-pct{font-size:12px;font-weight:700;color:var(--c-primary);width:32px;font-family:var(--font-de)}
+
+/* Heat calendar */
+.cal-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:4px;
+  margin-top:10px;
+}
+.cal-day{
+  aspect-ratio:1;
+  border-radius:4px;
+  background:var(--bg-input);
+}
+.cal-day.d1{background:var(--c-primary-l);opacity:.3}
+.cal-day.d2{background:var(--c-primary-l);opacity:.6}
+.cal-day.d3{background:var(--c-primary)}
+.cal-day.today{outline:2px solid var(--c-accent)}
+
+/* ── Utility ── */
+.flex{display:flex}
+.flex-col{flex-direction:column}
+.items-center{align-items:center}
+.justify-between{justify-content:space-between}
+.gap-8{gap:8px}
+.gap-12{gap:12px}
+.mt-8{margin-top:8px}
+.mt-12{margin-top:12px}
+.mt-16{margin-top:16px}
+.p-16{padding:16px}
+.ltr{direction:ltr;text-align:left}
+.rtl{direction:rtl;text-align:right}
+.de-text{font-family:var(--font-de)}
+.bold{font-weight:700}
+.text-sm{font-size:13px}
+.text-xs{font-size:11px}
+.text-muted{color:var(--txt-3)}
+.text-primary{color:var(--c-primary)}
+.text-accent{color:var(--c-accent)}
+
+/* Divider */
+.divider{height:1px;background:var(--border);margin:0 16px}
+
+/* ── Scrollable content padding ── */
+.scroll-content{
+  flex:1;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:8px;
+}
+.scroll-content::-webkit-scrollbar{width:3px}
+.scroll-content::-webkit-scrollbar-thumb{background:var(--c-primary-l);border-radius:4px}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <!-- Header -->
+  <header class="app-header" id="app-header">
+    <div class="header-title">
+      <span id="header-emoji">🏠</span>
+      <span id="header-text">خانه</span>
+      <span class="de" id="header-de">Home</span>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" id="btn-theme" title="تغییر تم" onclick="toggleTheme()">🌙</button>
+      <button class="icon-btn" id="btn-level" onclick="showLevelPicker()" title="سطح">
+        <span id="level-badge-small" style="font-size:11px;font-weight:800;font-family:var(--font-de)">B1</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Pages -->
+  <div class="page-content" id="page-content">
+    <!-- HOME PAGE -->
+    <div class="page active" id="page-home">
+      <div class="scroll-content">
+        <!-- Streak Banner -->
+        <div class="streak-banner">
+          <div class="streak-flame">🔥</div>
+          <div class="streak-info">
+            <div class="streak-num" id="streak-num">0</div>
+            <div class="streak-label">روز پشت سر هم یاد گرفتی</div>
+            <div class="streak-sub" id="streak-sub">امروز شروع کن!</div>
+          </div>
+          <div style="margin-right:auto">
+            <div class="level-badge" id="home-level-badge">B1</div>
+          </div>
+        </div>
+
+        <!-- Today's Goal -->
+        <div class="goal-card">
+          <div class="goal-top">
+            <div class="goal-title">🎯 هدف امروز</div>
+            <div class="goal-count"><span id="goal-done">0</span> / <span id="goal-total">10</span></div>
+          </div>
+          <div class="prog-bar">
+            <div class="prog-fill" id="goal-bar" style="width:0%"></div>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:8px">
+            <button class="btn btn-primary btn-sm" style="flex:1" onclick="navigate('practice','srs')">▶ شروع مرور</button>
+            <button class="btn btn-ghost btn-sm" style="flex:1" onclick="navigate('practice','flash')">🃏 فلش‌کارت</button>
+          </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-icon">📚</div>
+            <div class="stat-value" id="stat-total">0</div>
+            <div class="stat-label">کل واژه یاد گرفته</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⏰</div>
+            <div class="stat-value" id="stat-due">0</div>
+            <div class="stat-label">برای مرور امروز</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🏆</div>
+            <div class="stat-value" id="stat-mastered">0</div>
+            <div class="stat-label">کاملاً بلد</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📅</div>
+            <div class="stat-value" id="stat-days">0</div>
+            <div class="stat-label">روز فعال</div>
+          </div>
+        </div>
+
+        <!-- Quick Access -->
+        <div class="section-title" style="padding:0 16px">
+          <span>دسترسی سریع</span>
+        </div>
+        <div class="quick-row">
+          <div class="quick-btn" onclick="navigate('learn','grammar')">
+            <div class="q-icon">📖</div>
+            <div class="q-label">گرامر</div>
+          </div>
+          <div class="quick-btn" onclick="navigate('learn','sentences')">
+            <div class="q-icon">💬</div>
+            <div class="q-label">جملات</div>
+          </div>
+          <div class="quick-btn" onclick="navigate('learn','fuhrerschein')">
+            <div class="q-icon">🚗</div>
+            <div class="q-label">گواهینامه</div>
+          </div>
+          <div class="quick-btn" onclick="navigate('practice','quiz')">
+            <div class="q-icon">❓</div>
+            <div class="q-label">آزمون</div>
+          </div>
+          <div class="quick-btn" onclick="navigate('practice','type')">
+            <div class="q-icon">⌨️</div>
+            <div class="q-label">دیکته</div>
+          </div>
+        </div>
+
+        <!-- Category Overview -->
+        <div class="section-title" style="padding:0 16px">
+          <span>دسته‌ها</span>
+        </div>
+        <div class="cat-grid" id="home-cats"></div>
+      </div>
+    </div>
+
+    <!-- LEARN PAGE -->
+    <div class="page" id="page-learn">
+      <div class="tab-bar" id="learn-tabs">
+        <div class="tab-pill active" onclick="switchLearnTab('grammar')">📖 Grammatik</div>
+        <div class="tab-pill" onclick="switchLearnTab('sentences')">💬 Sätze</div>
+        <div class="tab-pill" onclick="switchLearnTab('fuhrerschein')">🚗 Führerschein</div>
+      </div>
+      <div class="search-wrap">
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="learn-search" placeholder="جستجو به آلمانی یا فارسی..." oninput="onLearnSearch(this.value)"/>
+        </div>
+      </div>
+      <div class="scroll-content" id="learn-content"></div>
+    </div>
+
+    <!-- PRACTICE PAGE -->
+    <div class="page" id="page-practice">
+      <div class="scroll-content" id="practice-content"></div>
+    </div>
+
+    <!-- PROGRESS PAGE -->
+    <div class="page" id="page-progress">
+      <div class="scroll-content">
+        <div class="prog-page" id="progress-content"></div>
+      </div>
+    </div>
+
+    <!-- SETTINGS PAGE -->
+    <div class="page" id="page-settings">
+      <div class="scroll-content">
+        <div class="setting-group">
+          <div class="setting-group-title">یادگیری</div>
+          <div class="setting-row">
+            <div class="setting-item">
+              <div class="s-icon">🎯</div>
+              <div class="s-info">
+                <div class="s-label">سطح فعلی</div>
+                <div class="s-sub">از B1 به بالا</div>
+              </div>
+              <div class="s-ctrl">
+                <select class="s-select" id="sel-level" onchange="setLevel(this.value)">
+                  <option value="b1">B1</option>
+                  <option value="b2">B2</option>
+                  <option value="c1">C1</option>
+                  <option value="c2">C2</option>
+                  <option value="all">همه</option>
+                </select>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="s-icon">🎯</div>
+              <div class="s-info">
+                <div class="s-label">هدف روزانه</div>
+                <div class="s-sub">تعداد کارت برای مرور روزانه</div>
+              </div>
+              <div class="s-ctrl">
+                <select class="s-select" id="sel-goal" onchange="setGoal(this.value)">
+                  <option value="5">۵</option>
+                  <option value="10" selected>۱۰</option>
+                  <option value="20">۲۰</option>
+                  <option value="30">۳۰</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="setting-group-title">نمایش</div>
+          <div class="setting-row">
+            <div class="setting-item">
+              <div class="s-icon">🌙</div>
+              <div class="s-info">
+                <div class="s-label">حالت تاریک</div>
+                <div class="s-sub">Dark Mode</div>
+              </div>
+              <div class="s-ctrl">
+                <label class="toggle">
+                  <input type="checkbox" id="toggle-dark" onchange="toggleTheme()"/>
+                  <span class="toggle-track"></span>
+                </label>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="s-icon">🔊</div>
+              <div class="s-info">
+                <div class="s-label">صدای تلفظ</div>
+                <div class="s-sub">Text-to-Speech آلمانی</div>
+              </div>
+              <div class="s-ctrl">
+                <label class="toggle">
+                  <input type="checkbox" id="toggle-tts" checked onchange="saveSetting('tts',this.checked)"/>
+                  <span class="toggle-track"></span>
+                </label>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="s-icon">⚡</div>
+              <div class="s-info">
+                <div class="s-label">سرعت تلفظ</div>
+                <div class="s-sub">Speech Rate</div>
+              </div>
+              <div class="s-ctrl">
+                <select class="s-select" id="sel-rate" onchange="saveSetting('rate',this.value)">
+                  <option value="0.7">کُند</option>
+                  <option value="1.0" selected>نرمال</option>
+                  <option value="1.3">سریع</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="setting-group-title">داده</div>
+          <div class="setting-row">
+            <div class="setting-item" onclick="exportProgress()" style="cursor:pointer">
+              <div class="s-icon">📤</div>
+              <div class="s-info">
+                <div class="s-label">خروجی پیشرفت</div>
+                <div class="s-sub">Export progress as JSON</div>
+              </div>
+              <div class="s-ctrl">›</div>
+            </div>
+            <div class="setting-item" onclick="confirmReset()" style="cursor:pointer">
+              <div class="s-icon">🗑️</div>
+              <div class="s-info">
+                <div class="s-label" style="color:var(--c-danger)">ریست کامل</div>
+                <div class="s-sub">حذف تمام پیشرفت‌ها</div>
+              </div>
+              <div class="s-ctrl">›</div>
+            </div>
+          </div>
+          <div class="setting-group-title">درباره</div>
+          <div class="setting-row">
+            <div class="setting-item">
+              <div class="s-icon">ℹ️</div>
+              <div class="s-info">
+                <div class="s-label">Saleh Deutsch</div>
+                <div class="s-sub">نسخه ۱.۰ • آفلاین PWA</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- end page-content -->
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <div class="nav-item active" id="nav-home" onclick="navigate('home')">
+      <span class="nav-icon">🏠</span>
+      <span class="nav-label">خانه</span>
+      <span class="nav-pip"></span>
+    </div>
+    <div class="nav-item" id="nav-learn" onclick="navigate('learn')">
+      <span class="nav-icon">📖</span>
+      <span class="nav-label">یادگیری</span>
+      <span class="nav-pip"></span>
+    </div>
+    <div class="nav-item" id="nav-practice" onclick="navigate('practice')">
+      <span class="nav-icon">🎮</span>
+      <span class="nav-label">تمرین</span>
+      <span class="nav-pip"></span>
+    </div>
+    <div class="nav-item" id="nav-progress" onclick="navigate('progress')">
+      <span class="nav-icon">📊</span>
+      <span class="nav-label">پیشرفت</span>
+      <span class="nav-pip"></span>
+    </div>
+    <div class="nav-item" id="nav-settings" onclick="navigate('settings')">
+      <span class="nav-icon">⚙️</span>
+      <span class="nav-label">تنظیمات</span>
+      <span class="nav-pip"></span>
+    </div>
+  </nav>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+//  PART 1 — FOUNDATION: State, Router, UI
+// ═══════════════════════════════════════════
+
+// ── App State ──
+const S = {
+  view: 'home',
+  learnTab: 'grammar',
+  learnSubTab: 'b1',
+  sentenceFilter: 'hoch',
+  fuhrFilter: 'all',
+  practiceMode: 'menu',
+  level: 'b1',
+  theme: 'light',
+  tts: true,
+  rate: 1.0,
+  goal: 10,
+  progress: {},   // {id: {learned,mastered,srs:{interval,ef,due,reps}}}
+  streak: 0,
+  lastDate: null,
+  activeDays: [],
+  sessionDone: 0,
+  // VOCAB will be injected in Part 2
+  VOCAB: []
+};
+
+// ── Load from localStorage ──
+function loadState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('sd_state') || '{}');
+    if (saved.level)    S.level    = saved.level;
+    if (saved.theme)    S.theme    = saved.theme;
+    if (saved.tts!=null) S.tts     = saved.tts;
+    if (saved.rate)     S.rate     = parseFloat(saved.rate);
+    if (saved.goal)     S.goal     = parseInt(saved.goal);
+    if (saved.progress) S.progress = saved.progress;
+    if (saved.streak)   S.streak   = saved.streak;
+    if (saved.lastDate) S.lastDate = saved.lastDate;
+    if (saved.activeDays) S.activeDays = saved.activeDays;
+    // Update streak
+    const today = todayStr();
+    if (S.lastDate !== today) {
+      const yesterday = new Date(); yesterday.setDate(yesterday.getDate()-1);
+      const yStr = yesterday.toISOString().slice(0,10);
+      if (S.lastDate === yStr) { /* streak continues */ }
+      else if (S.lastDate !== today) { S.streak = 0; }
+    }
+  } catch(e) { console.warn('loadState',e); }
+}
+
+function saveState() {
+  try {
+    localStorage.setItem('sd_state', JSON.stringify({
+      level: S.level, theme: S.theme, tts: S.tts,
+      rate: S.rate, goal: S.goal, progress: S.progress,
+      streak: S.streak, lastDate: S.lastDate, activeDays: S.activeDays
+    }));
+  } catch(e) {}
+}
+
+function todayStr() { return new Date().toISOString().slice(0,10); }
+
+// ── Router ──
+const PAGES = {
+  home:     { emoji:'🏠', fa:'خانه',     de:'Home' },
+  learn:    { emoji:'📖', fa:'یادگیری',  de:'Lernen' },
+  practice: { emoji:'🎮', fa:'تمرین',    de:'Üben' },
+  progress: { emoji:'📊', fa:'پیشرفت',   de:'Fortschritt' },
+  settings: { emoji:'⚙️', fa:'تنظیمات', de:'Einstellungen' }
+};
+
+function navigate(view, subParam) {
+  // Deactivate current
+  document.getElementById('page-'+S.view)?.classList.remove('active');
+  document.getElementById('nav-'+S.view)?.classList.remove('active');
+  // Activate new
+  S.view = view;
+  if (subParam) S.practiceMode = subParam;
+  document.getElementById('page-'+view)?.classList.add('active');
+  document.getElementById('nav-'+view)?.classList.add('active');
+  // Update header
+  const p = PAGES[view];
+  document.getElementById('header-emoji').textContent = p.emoji;
+  document.getElementById('header-text').textContent  = p.fa;
+  document.getElementById('header-de').textContent    = p.de;
+  // Render page
+  renderPage(view, subParam);
+  // Scroll to top
+  document.getElementById('page-content').scrollTop = 0;
+}
+
+function renderPage(view, sub) {
+  switch(view) {
+    case 'home':     renderHome();     break;
+    case 'learn':    renderLearn(sub); break;
+    case 'practice': renderPractice(sub); break;
+    case 'progress': renderProgress(); break;
+    case 'settings': syncSettings();   break;
+  }
+}
+
+// ── Theme ──
+function toggleTheme() {
+  S.theme = S.theme === 'light' ? 'dark' : 'light';
+  applyTheme();
+  saveState();
+}
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', S.theme);
+  const isDark = S.theme === 'dark';
+  document.getElementById('btn-theme').textContent = isDark ? '☀️' : '🌙';
+  const tog = document.getElementById('toggle-dark');
+  if (tog) tog.checked = isDark;
+  const meta = document.querySelector('meta[name=theme-color]');
+  if (meta) meta.content = isDark ? '#142B1F' : '#2D6A4F';
+}
+
+// ── Level ──
+function setLevel(v) {
+  S.level = v;
+  saveState();
+  document.getElementById('level-badge-small').textContent = v.toUpperCase();
+  document.getElementById('home-level-badge').textContent  = v.toUpperCase();
+  showToast('سطح تغییر کرد: ' + v.toUpperCase());
+  if (S.view === 'home') renderHome();
+  if (S.view === 'learn') renderLearn();
+}
+function showLevelPicker() {
+  const levels = ['b1','b2','c1','c2','all'];
+  const cur = S.level;
+  const idx = levels.indexOf(cur);
+  const next = levels[(idx+1) % levels.length];
+  setLevel(next);
+}
+
+// ── Settings helpers ──
+function saveSetting(key, val) {
+  S[key] = val;
+  saveState();
+}
+function setGoal(v) { S.goal = parseInt(v); saveState(); renderHome(); }
+function syncSettings() {
+  const sl = document.getElementById('sel-level');
+  const sg = document.getElementById('sel-goal');
+  const sr = document.getElementById('sel-rate');
+  const tt = document.getElementById('toggle-tts');
+  const td = document.getElementById('toggle-dark');
+  if (sl) sl.value = S.level;
+  if (sg) sg.value = S.goal;
+  if (sr) sr.value = S.rate;
+  if (tt) tt.checked = S.tts;
+  if (td) td.checked = S.theme==='dark';
+}
+
+// ── TTS ──
+function speak(text) {
+  if (!S.tts) return;
+  if (!window.speechSynthesis) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'de-DE';
+  u.rate = S.rate;
+  u.pitch = 1;
+  speechSynthesis.speak(u);
+}
+
+// ── Toast ──
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ── Helpers ──
+function filteredVocab(type, level) {
+  if (!S.VOCAB.length) return [];
+  return S.VOCAB.filter(v =>
+    (!type  || v.type  === type) &&
+    (!level || level === 'all' || v.level === level || v.level === 'all')
+  );
+}
+function learnedCount(type) {
+  const items = type ? S.VOCAB.filter(v=>v.type===type) : S.VOCAB;
+  return items.filter(v => S.progress[v.id]?.learned).length;
+}
+function masteredCount() {
+  return S.VOCAB.filter(v => S.progress[v.id]?.mastered).length;
+}
+function dueCount() {
+  const today = todayStr();
+  return S.VOCAB.filter(v => {
+    const srs = S.progress[v.id]?.srs;
+    return !srs || srs.due <= today;
+  }).length;
+}
+function markLearned(id, learned) {
+  if (!S.progress[id]) S.progress[id] = {};
+  S.progress[id].learned = learned;
+  if (learned) {
+    S.sessionDone++;
+    // Update streak
+    const today = todayStr();
+    if (S.lastDate !== today) {
+      const yesterday = new Date(); yesterday.setDate(yesterday.getDate()-1);
+      const yStr = yesterday.toISOString().slice(0,10);
+      if (S.lastDate === yStr) S.streak++;
+      else S.streak = 1;
+      S.lastDate = today;
+      if (!S.activeDays.includes(today)) S.activeDays.push(today);
+    }
+  }
+  saveState();
+}
+
+// ── Home Page ──
+function renderHome() {
+  const total   = learnedCount();
+  const mastered= masteredCount();
+  const due     = dueCount();
+  const days    = S.activeDays.length;
+  const done    = S.sessionDone;
+  const pct     = Math.min(100, Math.round(done/S.goal*100));
+
+  document.getElementById('streak-num').textContent = S.streak;
+  document.getElementById('streak-sub').textContent =
+    S.streak > 0 ? `${S.streak} روز متوالی 💪` : 'امروز شروع کن!';
+  document.getElementById('goal-done').textContent  = Math.min(done, S.goal);
+  document.getElementById('goal-total').textContent = S.goal;
+  document.getElementById('goal-bar').style.width   = pct + '%';
+  document.getElementById('stat-total').textContent   = total;
+  document.getElementById('stat-due').textContent     = due;
+  document.getElementById('stat-mastered').textContent= mastered;
+  document.getElementById('stat-days').textContent    = days;
+  document.getElementById('home-level-badge').textContent =
+    S.level === 'all' ? 'همه' : S.level.toUpperCase();
+  document.getElementById('level-badge-small').textContent =
+    S.level === 'all' ? 'ALL' : S.level.toUpperCase();
+
+  const CATS = [
+    {type:'grammar',    emoji:'📖', fa:'گرامر',      de:'Grammatik',    color:'#2D6A4F'},
+    {type:'hoch',       emoji:'🎩', fa:'Hochdeutsch', de:'Formell',      color:'#457B9D'},
+    {type:'umgang',     emoji:'💬', fa:'Umgangssprache',de:'Informell',  color:'#E76F51'},
+    {type:'fuhrerschein',emoji:'🚗',fa:'گواهینامه',  de:'Führerschein', color:'#F4A261'},
+  ];
+  const grid = document.getElementById('home-cats');
+  grid.innerHTML = CATS.map(c => {
+    const total = S.VOCAB.filter(v=>v.type===c.type).length;
+    const done  = learnedCount(c.type);
+    const pct   = total ? Math.round(done/total*100) : 0;
+    return `<div class="cat-card" style="--cat-color:${c.color}" onclick="navigate('learn','${c.type}')">
+      <div class="cat-emoji">${c.emoji}</div>
+      <div>
+        <div class="cat-name">${c.fa}</div>
+        <div class="cat-de de-text">${c.de}</div>
+      </div>
+      <div class="cat-count">${done}/${total} واژه</div>
+      <div class="cat-prog">
+        <div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${c.color}"></div></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── Learn Tab Switch ──
+function switchLearnTab(tab) {
+  S.learnTab = tab;
+  document.querySelectorAll('#learn-tabs .tab-pill').forEach((el,i) => {
+    const tabs = ['grammar','sentences','fuhrerschein'];
+    el.classList.toggle('active', tabs[i] === tab);
+  });
+  renderLearn();
+}
+
+// ── Learn Page (shell, content filled in Part 3) ──
+function renderLearn(sub) {
+  if (sub && ['grammar','sentences','fuhrerschein'].includes(sub)) {
+    switchLearnTab(sub);
+    return;
+  }
+  const el = document.getElementById('learn-content');
+  if (!S.VOCAB.length) {
+    el.innerHTML = `<div class="empty-state">
+      <div class="e-icon">📦</div>
+      <div class="e-title">داده در حال بارگذاری...</div>
+      <div class="e-sub">واژگان در بخش بعدی اضافه می‌شوند</div>
+    </div>`;
+    return;
+  }
+  renderLearnContent(el);
+}
+
+function onLearnSearch(q) {
+  renderLearn();
+}
+
+// ── Practice Page (shell) ──
+function renderPractice(mode) {
+  const el = document.getElementById('practice-content');
+  if (!S.VOCAB.length) {
+    el.innerHTML = `<div class="empty-state">
+      <div class="e-icon">🎮</div>
+      <div class="e-title">داده در حال بارگذاری...</div>
+      <div class="e-sub">حالت‌های تمرین در بخش ۴ اضافه می‌شوند</div>
+    </div>`;
+    return;
+  }
+  renderPracticeContent(el, mode || S.practiceMode);
+}
+
+// ── Progress Page (shell) ──
+function renderProgress() {
+  const el = document.getElementById('progress-content');
+  if (typeof renderProgressContent === 'function') {
+    renderProgressContent(el);
+  } else {
+    el.innerHTML = `<div class="empty-state">
+      <div class="e-icon">📊</div>
+      <div class="e-title">آمار در حال آماده‌سازی...</div>
+      <div class="e-sub">صفحه پیشرفت در بخش ۵ کامل می‌شود</div>
+    </div>`;
+  }
+}
+
+// ── Export / Reset ──
+function exportProgress() {
+  const data = JSON.stringify({progress:S.progress, streak:S.streak, activeDays:S.activeDays}, null, 2);
+  const blob = new Blob([data], {type:'application/json'});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = 'saleh-deutsch-progress.json';
+  a.click(); URL.revokeObjectURL(url);
+  showToast('پیشرفت ذخیره شد ✓');
+}
+function confirmReset() {
+  if (confirm('آیا مطمئنی؟ تمام پیشرفت‌ها حذف می‌شود!')) {
+    S.progress = {}; S.streak = 0; S.lastDate = null;
+    S.activeDays = []; S.sessionDone = 0;
+    saveState();
+    renderHome();
+    showToast('ریست شد');
+  }
+}
+
+// ═══════════════════════════════════════════
+//  PART 3 — LEARN SECTION
+// ═══════════════════════════════════════════
+
+// ── CSS for Learn cards (injected once) ──
+(function injectLearnCSS(){
+  if(document.getElementById('learn-css')) return;
+  const s = document.createElement('style');
+  s.id = 'learn-css';
+  s.textContent = `
+.vocab-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 16px;
+  margin: 0 16px 10px;
+  box-shadow: var(--shadow);
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
+}
+.vocab-card.learned { border-color: var(--c-primary-l); background: #f0faf4; }
+[data-theme=dark] .vocab-card.learned { background: #192b20; }
+.vocab-card .vc-top { display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:10px; }
+.vocab-card .vc-de { font-family: var(--font-de); font-size:17px; font-weight:700; color:var(--txt); direction:ltr; text-align:left; line-height:1.4; flex:1; }
+.vocab-card .vc-badges { display:flex; gap:5px; flex-wrap:wrap; justify-content:flex-end; flex-shrink:0; }
+.vocab-card .vc-pro { font-family: var(--font-de); font-size:12px; color:var(--txt-3); direction:ltr; text-align:left; margin-bottom:8px; font-style:italic; }
+.vocab-card .vc-fa { font-size:15px; color:var(--txt); line-height:1.7; border-top:1px solid var(--border); padding-top:10px; margin-top:4px; }
+.vocab-card .vc-notes { font-size:12px; color:var(--txt-3); margin-top:8px; line-height:1.5; }
+.vocab-card .vc-actions { display:flex; gap:8px; margin-top:12px; }
+.vc-btn { display:flex; align-items:center; gap:5px; padding:7px 12px; border-radius:20px; font-size:12px; font-weight:600; cursor:pointer; transition:all .15s; }
+.vc-btn:active { transform:scale(.93); }
+.vc-btn-audio { background:var(--bg-input); color:var(--c-info); }
+.vc-btn-audio:hover { background:#ddeeff; }
+.vc-btn-learn { background:var(--bg-chip); color:var(--c-primary); }
+.vc-btn-learn.done { background:#d0f0de; color:#1a5c35; }
+[data-theme=dark] .vc-btn-learn.done { background:#1a4030; color:#6fcf97; }
+.vc-btn-learn:active { transform:scale(.93); }
+.vc-card-accent { position:absolute; top:0; left:0; width:4px; height:100%; border-radius:4px 0 0 4px; }
+
+.learn-filter-row { display:flex; gap:8px; padding:0 16px 12px; overflow-x:auto; scrollbar-width:none; }
+.learn-filter-row::-webkit-scrollbar { display:none; }
+.f-pill { flex-shrink:0; padding:6px 14px; border-radius:20px; font-size:12px; font-weight:700; cursor:pointer; transition:all .15s; border:1.5px solid var(--border); color:var(--txt-2); background:var(--bg-card); font-family:var(--font-de); }
+.f-pill:active { transform:scale(.93); }
+.f-pill.active { border-color:var(--c-primary); color:var(--c-primary); background:var(--bg-chip); }
+.f-pill.b1.active { border-color:#2D6A4F; background:#d8eddf; color:#1b5e35; }
+.f-pill.b2.active { border-color:#457B9D; background:#d6e4f0; color:#1a3f5c; }
+.f-pill.c1.active { border-color:#E76F51; background:#fce8d5; color:#7a3010; }
+.f-pill.c2.active { border-color:#c0392b; background:#f5d5d5; color:#7a1010; }
+
+.toggle-row { display:flex; gap:0; padding:0 16px 12px; }
+.tg-btn { flex:1; padding:9px; text-align:center; font-size:13px; font-weight:700; cursor:pointer; border:1.5px solid var(--border); background:var(--bg-card); color:var(--txt-2); transition:all .15s; }
+.tg-btn:first-child { border-radius: var(--r-sm) 0 0 var(--r-sm); }
+.tg-btn:last-child  { border-radius: 0 var(--r-sm) var(--r-sm) 0; border-left:none; }
+.tg-btn.active { background:var(--c-primary); color:#fff; border-color:var(--c-primary); }
+
+.cat-section-title { font-size:12px; font-weight:800; letter-spacing:.7px; color:var(--txt-3); text-transform:uppercase; padding:14px 16px 6px; display:flex; align-items:center; gap:8px; }
+.cat-section-title span { flex:1; height:1px; background:var(--border); }
+
+.result-count { font-size:12px; color:var(--txt-3); padding:0 16px 8px; font-weight:600; }
+  `;
+  document.head.appendChild(s);
+})();
+
+// ── Level color map ──
+const LEVEL_COLOR = { b1:'#2D6A4F', b2:'#457B9D', c1:'#E76F51', c2:'#c0392b', all:'#888' };
+const TYPE_COLOR  = { grammar:'#2D6A4F', hoch:'#457B9D', umgang:'#E76F51', fuhrerschein:'#F4A261' };
+
+// ── Render a single vocab card ──
+function vocabCardHTML(item, opts={}) {
+  const isLearned = !!S.progress[item.id]?.learned;
+  const accent    = opts.accent || TYPE_COLOR[item.type] || 'var(--c-primary)';
+  const lvlLabel  = item.level !== 'all' ? item.level.toUpperCase() : '';
+  return `
+<div class="vocab-card${isLearned?' learned':''}" id="vc-${item.id}">
+  <div class="vc-card-accent" style="background:${accent}"></div>
+  <div class="vc-top">
+    <div class="vc-de">${item.de}</div>
+    <div class="vc-badges">
+      ${lvlLabel ? `<span class="chip ${item.level}">${lvlLabel}</span>` : ''}
+      ${item.cat  ? `<span class="chip" style="font-size:10px">${item.cat}</span>` : ''}
+    </div>
+  </div>
+  ${item.pro ? `<div class="vc-pro">[ ${item.pro} ]</div>` : ''}
+  <div class="vc-fa">${item.fa}</div>
+  ${item.notes ? `<div class="vc-notes">💡 ${item.notes}</div>` : ''}
+  <div class="vc-actions">
+    <button class="vc-btn vc-btn-audio" onclick="speak('${item.de.replace(/'/g,"\\'")}')">🔊 صدا</button>
+    <button class="vc-btn vc-btn-learn${isLearned?' done':''}" id="vb-${item.id}" onclick="toggleLearned('${item.id}')">
+      ${isLearned ? '✓ یاد گرفتم' : '+ یاد گرفتم'}
+    </button>
+  </div>
+</div>`;
+}
+
+// ── Toggle learned without full re-render ──
+function toggleLearned(id) {
+  const isNow = !S.progress[id]?.learned;
+  markLearned(id, isNow);
+  const card = document.getElementById('vc-'+id);
+  const btn  = document.getElementById('vb-'+id);
+  if (card) card.classList.toggle('learned', isNow);
+  if (btn)  { btn.classList.toggle('done', isNow); btn.textContent = isNow ? '✓ یاد گرفتم' : '+ یاد گرفتم'; }
+  showToast(isNow ? '✓ اضافه شد' : 'حذف شد');
+  if (S.view === 'home') renderHome();
+}
+
+// ── Main learn renderer ──
+function renderLearnContent(el) {
+  const q   = (document.getElementById('learn-search')?.value || '').trim().toLowerCase();
+  const tab = S.learnTab;
+
+  if (tab === 'grammar')       renderGrammar(el, q);
+  else if (tab === 'sentences') renderSentences(el, q);
+  else if (tab === 'fuhrerschein') renderFuhrerschein(el, q);
+}
+
+// ── GRAMMAR TAB ──
+const GRAMMAR_LEVELS = ['all','b1','b2','c1','c2'];
+function renderGrammar(el, q) {
+  const lv = S.learnSubTab || 'b1';
+  // Level filter
+  let html = `<div class="learn-filter-row">`;
+  GRAMMAR_LEVELS.forEach(l => {
+    const label = l === 'all' ? 'همه' : l.toUpperCase();
+    html += `<div class="f-pill ${l} ${lv===l?'active':''}" onclick="setLearnSub('${l}')">${label}</div>`;
+  });
+  html += `</div>`;
+
+  // Filter vocab
+  let items = S.VOCAB.filter(v => v.type === 'grammar');
+  if (lv !== 'all') items = items.filter(v => v.level === lv);
+  if (q) items = items.filter(v => v.de.toLowerCase().includes(q) || v.fa.includes(q) || (v.notes||'').toLowerCase().includes(q));
+
+  html += `<div class="result-count">${items.length} مورد</div>`;
+
+  // Group by cat
+  const cats = [...new Set(items.map(v => v.cat))];
+  cats.forEach(cat => {
+    const group = items.filter(v => v.cat === cat);
+    html += `<div class="cat-section-title">${cat} <span></span></div>`;
+    group.forEach(item => { html += vocabCardHTML(item, {accent: LEVEL_COLOR[item.level]}); });
+  });
+
+  if (!items.length) html += `<div class="empty-state"><div class="e-icon">🔍</div><div class="e-title">نتیجه‌ای پیدا نشد</div></div>`;
+  el.innerHTML = html;
+}
+
+function setLearnSub(lv) {
+  S.learnSubTab = lv;
+  const el = document.getElementById('learn-content');
+  if (el) renderLearnContent(el);
+  // update pills
+  document.querySelectorAll('.f-pill').forEach(p => {
+    p.classList.toggle('active', p.getAttribute('onclick')?.includes(`'${lv}'`));
+    p.classList.toggle(lv, p.getAttribute('onclick')?.includes(`'${lv}'`));
+  });
+}
+
+// ── SENTENCES TAB ──
+function renderSentences(el, q) {
+  const filter = S.sentenceFilter || 'hoch';
+  let html = `<div class="toggle-row">
+    <div class="tg-btn ${filter==='hoch'?'active':''}" onclick="setSentFilter('hoch')">🎩 Hochdeutsch</div>
+    <div class="tg-btn ${filter==='umgang'?'active':''}" onclick="setSentFilter('umgang')">💬 Umgangssprache</div>
+  </div>`;
+
+  let items = S.VOCAB.filter(v => v.type === filter);
+  if (q) items = items.filter(v => v.de.toLowerCase().includes(q) || v.fa.includes(q) || (v.cat||'').toLowerCase().includes(q));
+
+  html += `<div class="result-count">${items.length} جمله</div>`;
+
+  // Group by cat
+  const cats = [...new Set(items.map(v => v.cat))];
+  cats.forEach(cat => {
+    const group = items.filter(v => v.cat === cat);
+    html += `<div class="cat-section-title">${cat} <span></span></div>`;
+    group.forEach(item => { html += vocabCardHTML(item, {accent: TYPE_COLOR[filter]}); });
+  });
+
+  if (!items.length) html += `<div class="empty-state"><div class="e-icon">🔍</div><div class="e-title">نتیجه‌ای پیدا نشد</div></div>`;
+  el.innerHTML = html;
+}
+
+function setSentFilter(f) {
+  S.sentenceFilter = f;
+  const el = document.getElementById('learn-content');
+  if (el) renderLearnContent(el);
+}
+
+// ── FÜHRERSCHEIN TAB ──
+const FUHR_CATS = ['all','Verkehrszeichen','Vorfahrt','Geschwindigkeit','Abstände','Überholen','Parken','Alkohol','Fahrzeugkunde','Erste Hilfe','Umwelt','Autobahn','Begriffe'];
+const FUHR_LABELS = { all:'همه', Verkehrszeichen:'تابلوها', Vorfahrt:'حق تقدم', Geschwindigkeit:'سرعت', Abstände:'فاصله', Überholen:'سبقت', Parken:'پارک', Alkohol:'الکل', Fahrzeugkunde:'خودرو', 'Erste Hilfe':'کمک اولیه', Umwelt:'محیط زیست', Autobahn:'اتوبان', Begriffe:'اصطلاحات' };
+
+function renderFuhrerschein(el, q) {
+  const fc = S.fuhrFilter || 'all';
+  let html = `<div class="learn-filter-row">`;
+  FUHR_CATS.forEach(c => {
+    const label = FUHR_LABELS[c] || c;
+    html += `<div class="f-pill ${fc===c?'active':''}" onclick="setFuhrFilter('${c}')">${label}</div>`;
+  });
+  html += `</div>`;
+
+  let items = S.VOCAB.filter(v => v.type === 'fuhrerschein');
+  if (fc !== 'all') items = items.filter(v => v.cat === fc);
+  if (q) items = items.filter(v => v.de.toLowerCase().includes(q) || v.fa.includes(q) || (v.notes||'').toLowerCase().includes(q));
+
+  html += `<div class="result-count">${items.length} واژه</div>`;
+
+  if (fc === 'all') {
+    const cats = [...new Set(items.map(v => v.cat))];
+    cats.forEach(cat => {
+      const group = items.filter(v => v.cat === cat);
+      html += `<div class="cat-section-title">${FUHR_LABELS[cat]||cat} <span></span></div>`;
+      group.forEach(item => { html += vocabCardHTML(item, {accent:'#F4A261'}); });
+    });
+  } else {
+    items.forEach(item => { html += vocabCardHTML(item, {accent:'#F4A261'}); });
+  }
+
+  if (!items.length) html += `<div class="empty-state"><div class="e-icon">🔍</div><div class="e-title">نتیجه‌ای پیدا نشد</div></div>`;
+  el.innerHTML = html;
+}
+
+function setFuhrFilter(c) {
+  S.fuhrFilter = c;
+  const el = document.getElementById('learn-content');
+  if (el) renderLearnContent(el);
+}
+
+// ── Override renderLearn to wire search properly ──
+function renderLearn(sub) {
+  if (sub && ['grammar','sentences','fuhrerschein'].includes(sub)) {
+    switchLearnTab(sub); return;
+  }
+  const el = document.getElementById('learn-content');
+  if (!el) return;
+  if (!S.VOCAB.length) {
+    el.innerHTML = `<div class="empty-state"><div class="e-icon">📦</div><div class="e-title">داده در حال بارگذاری...</div></div>`;
+    return;
+  }
+  renderLearnContent(el);
+}
+
+function onLearnSearch(q) {
+  const el = document.getElementById('learn-content');
+  if (el) renderLearnContent(el);
+}
+
+// ═══════════════════════════════════════════
+//  PART 4 — PRACTICE SECTION
+// ═══════════════════════════════════════════
+
+(function injectPracticeCSS(){
+  if(document.getElementById('prac-css')) return;
+  const s = document.createElement('style');
+  s.id = 'prac-css';
+  s.textContent = `
+/* Practice Menu */
+.prac-menu { padding:16px; display:flex; flex-direction:column; gap:12px; }
+.prac-mode-card {
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:var(--r-lg); padding:20px;
+  display:flex; align-items:center; gap:16px;
+  box-shadow:var(--shadow); cursor:pointer;
+  transition:all .2s; position:relative; overflow:hidden;
+}
+.prac-mode-card::before {
+  content:''; position:absolute; top:0; right:0;
+  width:5px; height:100%; background:var(--pm-color,var(--c-primary));
+}
+.prac-mode-card:active { transform:scale(.97); box-shadow:var(--shadow-md); }
+.pm-icon { font-size:36px; flex-shrink:0; }
+.pm-info { flex:1; }
+.pm-title { font-size:16px; font-weight:800; margin-bottom:4px; }
+.pm-sub { font-size:12px; color:var(--txt-3); line-height:1.5; }
+.pm-badge { background:var(--bg-chip); color:var(--c-primary);
+  font-size:11px; font-weight:700; padding:3px 9px;
+  border-radius:20px; margin-top:6px; display:inline-block; }
+.pm-arrow { font-size:20px; color:var(--txt-3); }
+
+/* Session header */
+.sess-header {
+  background:var(--bg-card); border-bottom:1px solid var(--border);
+  padding:12px 16px; display:flex; align-items:center; gap:12px;
+  flex-shrink:0;
+}
+.sess-back { font-size:22px; cursor:pointer; padding:4px; }
+.sess-title { font-size:15px; font-weight:700; flex:1; }
+.sess-count { font-size:13px; font-weight:700; color:var(--c-primary); font-family:var(--font-de); }
+.sess-prog { height:4px; background:var(--bg-input); flex-shrink:0; }
+.sess-prog-fill { height:100%; background:var(--c-primary-l); transition:width .4s; }
+
+/* Flashcard */
+.flash-wrap {
+  flex:1; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:20px 16px; gap:16px;
+}
+.flash-scene { width:100%; max-width:380px; perspective:1000px; }
+.flash-card {
+  width:100%; min-height:260px;
+  position:relative; transform-style:preserve-3d;
+  transition:transform .5s cubic-bezier(.4,0,.2,1);
+  cursor:pointer;
+}
+.flash-card.flipped { transform:rotateY(180deg); }
+.flash-face {
+  position:absolute; inset:0;
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:var(--r-lg); padding:28px 24px;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  box-shadow:var(--shadow-md); text-align:center; gap:12px;
+}
+.flash-back { transform:rotateY(180deg); }
+.flash-label { font-size:11px; font-weight:700; letter-spacing:.8px;
+  color:var(--txt-3); text-transform:uppercase; }
+.flash-de { font-family:var(--font-de); font-size:22px; font-weight:800;
+  color:var(--txt); line-height:1.4; direction:ltr; }
+.flash-pro { font-family:var(--font-de); font-size:13px; color:var(--txt-3);
+  font-style:italic; direction:ltr; }
+.flash-fa { font-size:20px; font-weight:700; color:var(--c-primary); line-height:1.5; }
+.flash-notes { font-size:12px; color:var(--txt-3); line-height:1.5; }
+.flash-hint { font-size:13px; color:var(--txt-3); margin-top:-8px; }
+
+/* Rating buttons */
+.rating-row { display:flex; gap:8px; width:100%; max-width:380px; }
+.rate-btn {
+  flex:1; padding:12px 8px; border-radius:var(--r-md);
+  font-size:12px; font-weight:800; cursor:pointer;
+  transition:all .15s; text-align:center; border:none;
+  display:flex; flex-direction:column; gap:3px; align-items:center;
+}
+.rate-btn:active { transform:scale(.93); }
+.rate-again { background:#fde8e8; color:#c0392b; }
+.rate-hard  { background:#fef3e2; color:#d35400; }
+.rate-good  { background:#e8f5e9; color:#1e7e34; }
+.rate-easy  { background:#e3f2fd; color:#1565c0; }
+[data-theme=dark] .rate-again { background:#3d1515; color:#ff8a80; }
+[data-theme=dark] .rate-hard  { background:#3d2a10; color:#ffb74d; }
+[data-theme=dark] .rate-good  { background:#1a3320; color:#69f0ae; }
+[data-theme=dark] .rate-easy  { background:#102030; color:#82b1ff; }
+.rate-icon { font-size:20px; }
+.flash-filter-row { display:flex; gap:6px; overflow-x:auto;
+  padding:0 16px 4px; scrollbar-width:none; width:100%; max-width:380px; }
+.flash-filter-row::-webkit-scrollbar { display:none; }
+
+/* Quiz */
+.quiz-wrap { padding:16px; display:flex; flex-direction:column; gap:14px; }
+.quiz-q-card {
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:var(--r-lg); padding:24px;
+  box-shadow:var(--shadow-md); text-align:center;
+}
+.quiz-q-label { font-size:11px; font-weight:700; letter-spacing:.8px;
+  color:var(--txt-3); text-transform:uppercase; margin-bottom:12px; }
+.quiz-q-text { font-family:var(--font-de); font-size:20px; font-weight:800;
+  color:var(--txt); line-height:1.4; direction:ltr; margin-bottom:8px; }
+.quiz-q-pro { font-family:var(--font-de); font-size:12px; color:var(--txt-3);
+  font-style:italic; direction:ltr; }
+.quiz-options { display:flex; flex-direction:column; gap:10px; }
+.quiz-opt {
+  background:var(--bg-card); border:2px solid var(--border);
+  border-radius:var(--r-md); padding:14px 18px;
+  font-size:15px; cursor:pointer; text-align:right;
+  transition:all .18s; font-weight:600;
+}
+.quiz-opt:active { transform:scale(.98); }
+.quiz-opt.correct { border-color:#27ae60; background:#eafaf1; color:#1a5c35; }
+.quiz-opt.wrong   { border-color:#e74c3c; background:#fdf0ef; color:#7a1010; }
+[data-theme=dark] .quiz-opt.correct { background:#1a3d25; color:#6fcf97; }
+[data-theme=dark] .quiz-opt.wrong   { background:#3d1515; color:#ff8a80; }
+.quiz-next-btn { margin-top:8px; }
+
+/* Typing */
+.type-wrap { padding:16px; display:flex; flex-direction:column; gap:14px; }
+.type-q-card {
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:var(--r-lg); padding:24px; text-align:center;
+  box-shadow:var(--shadow-md);
+}
+.type-q-fa { font-size:20px; font-weight:700; color:var(--txt);
+  line-height:1.6; margin-bottom:8px; }
+.type-q-notes { font-size:12px; color:var(--txt-3); margin-top:8px; }
+.type-input-wrap { display:flex; flex-direction:column; gap:10px; }
+.type-input {
+  width:100%; padding:14px 16px;
+  background:var(--bg-card); border:2px solid var(--border);
+  border-radius:var(--r-md); font-size:16px;
+  font-family:var(--font-de); color:var(--txt); direction:ltr;
+  outline:none; transition:border-color .2s;
+}
+.type-input:focus { border-color:var(--c-primary-l); }
+.type-input.correct { border-color:#27ae60; background:#eafaf1; }
+.type-input.wrong   { border-color:#e74c3c; background:#fdf0ef; }
+.type-answer { font-family:var(--font-de); font-size:14px;
+  color:var(--c-primary); font-weight:700; direction:ltr;
+  padding:10px 14px; background:var(--bg-chip);
+  border-radius:var(--r-sm); display:none; }
+.type-answer.show { display:block; }
+
+/* Result screen */
+.result-screen {
+  flex:1; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:32px 24px; gap:16px; text-align:center;
+}
+.result-emoji { font-size:64px; animation:pulse 1.5s ease-in-out infinite; }
+.result-title { font-size:24px; font-weight:900; color:var(--txt); }
+.result-sub { font-size:14px; color:var(--txt-3); line-height:1.6; }
+.result-stats { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
+.result-stat { background:var(--bg-card); border:1px solid var(--border);
+  border-radius:var(--r-md); padding:14px 20px; min-width:90px; }
+.result-stat-val { font-size:28px; font-weight:900; color:var(--c-primary);
+  font-family:var(--font-de); }
+.result-stat-lbl { font-size:12px; color:var(--txt-3); margin-top:2px; }
+`;
+  document.head.appendChild(s);
+})();
+
+// ── SM-2 Spaced Repetition ──
+function getSRS(id) {
+  return S.progress[id]?.srs || { interval:0, ef:2.5, due:'', reps:0 };
+}
+function updateSRS(id, rating) {
+  // rating: 1=Again, 2=Hard, 3=Good, 4=Easy
+  if (!S.progress[id]) S.progress[id] = {};
+  let {interval, ef, reps} = getSRS(id);
+  if (rating === 1) { interval = 1; reps = 0; }
+  else if (rating === 2) { interval = Math.max(1, Math.round(interval * 1.2)); ef = Math.max(1.3, ef - 0.15); reps++; }
+  else if (rating === 3) { interval = reps < 2 ? 1 : Math.round(interval * ef); ef = Math.max(1.3, ef); reps++; }
+  else { interval = Math.max(1, Math.round(interval * ef * 1.3)); ef = Math.min(3.0, ef + 0.15); reps++; }
+  const due = new Date(); due.setDate(due.getDate() + interval);
+  S.progress[id].srs = { interval, ef: parseFloat(ef.toFixed(2)), due: due.toISOString().slice(0,10), reps };
+  if (rating >= 3) markLearned(id, true);
+  saveState();
+}
+function getDueCards(pool) {
+  const today = todayStr();
+  return pool.filter(v => {
+    const srs = S.progress[v.id]?.srs;
+    return !srs || !srs.due || srs.due <= today;
+  });
+}
+
+// ── Practice pool builder ──
+function buildPool(filterType) {
+  if (!filterType || filterType === 'all') return S.VOCAB;
+  if (filterType === 'grammar')      return S.VOCAB.filter(v => v.type === 'grammar');
+  if (filterType === 'sentences')    return S.VOCAB.filter(v => v.type === 'hoch' || v.type === 'umgang');
+  if (filterType === 'fuhrerschein') return S.VOCAB.filter(v => v.type === 'fuhrerschein');
+  return S.VOCAB;
+}
+
+// ── Session state ──
+let PS = {
+  mode: 'menu', pool: [], queue: [], idx: 0,
+  flipped: false, answered: false,
+  score: 0, total: 0, filter: 'all'
+};
+
+// ── Main practice renderer ──
+function renderPracticeContent(el, mode) {
+  PS.mode = mode || 'menu';
+  if (PS.mode === 'menu') { renderPracticeMenu(el); return; }
+  // Build pool from filter
+  PS.pool = buildPool(PS.filter);
+  if (PS.mode === 'srs') {
+    PS.queue = getDueCards(PS.pool);
+    if (!PS.queue.length) { renderNoCards(el); return; }
+  } else {
+    PS.queue = [...PS.pool].sort(() => Math.random() - .5).slice(0, 20);
+  }
+  PS.idx = 0; PS.score = 0; PS.total = PS.queue.length; PS.flipped = false; PS.answered = false;
+  renderPracticeSession(el);
+}
+
+// ── Practice Menu ──
+function renderPracticeMenu(el) {
+  const due = getDueCards(S.VOCAB).length;
+  const modes = [
+    { id:'srs',   icon:'🔄', title:'مرور هوشمند', de:'Spaced Repetition',
+      sub:'الگوریتم SM-2 — کارت‌هایی که موعد مرورشون رسیده', color:'#2D6A4F',
+      badge: due ? `${due} کارت برای امروز` : 'همه کارت‌ها مرور شده' },
+    { id:'flash', icon:'🃏', title:'فلش‌کارت', de:'Karteikarten',
+      sub:'تپ کن تا برگردانده بشه — آلمانی به فارسی', color:'#457B9D', badge:'تصادفی' },
+    { id:'quiz',  icon:'❓', title:'آزمون چهارگزینه‌ای', de:'Multiple Choice',
+      sub:'یکی از چهار گزینه رو انتخاب کن', color:'#E76F51', badge:'۲۰ سوال' },
+    { id:'type',  icon:'⌨️', title:'دیکته', de:'Tippen',
+      sub:'ترجمه فارسی رو ببین — آلمانی بنویس', color:'#9B59B6', badge:'تایپ‌کردنی' },
+  ];
+  const filters = [
+    { v:'all', label:'همه' }, { v:'grammar', label:'گرامر' },
+    { v:'sentences', label:'جملات' }, { v:'fuhrerschein', label:'گواهینامه' }
+  ];
+  let html = `<div class="prac-menu">
+    <div style="padding:4px 0 8px">
+      <div style="font-size:13px;font-weight:700;color:var(--txt-2);margin-bottom:8px">فیلتر محتوا:</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        ${filters.map(f=>`<div class="f-pill ${PS.filter===f.v?'active':''}" onclick="setPracFilter('${f.v}')">${f.label}</div>`).join('')}
+      </div>
+    </div>`;
+  modes.forEach(m => {
+    html += `<div class="prac-mode-card" style="--pm-color:${m.color}" onclick="startPractice('${m.id}')">
+      <div class="pm-icon">${m.icon}</div>
+      <div class="pm-info">
+        <div class="pm-title">${m.title}</div>
+        <div style="font-family:var(--font-de);font-size:11px;color:var(--txt-3);margin-bottom:4px">${m.de}</div>
+        <div class="pm-sub">${m.sub}</div>
+        <div class="pm-badge">${m.badge}</div>
+      </div>
+      <div class="pm-arrow">›</div>
+    </div>`;
+  });
+  html += `</div>`;
+  el.innerHTML = html;
+}
+
+function setPracFilter(f) {
+  PS.filter = f;
+  const el = document.getElementById('practice-content');
+  if (el) renderPracticeContent(el, 'menu');
+}
+function startPractice(mode) {
+  S.practiceMode = mode;
+  const el = document.getElementById('practice-content');
+  if (el) renderPracticeContent(el, mode);
+}
+
+function renderNoCards(el) {
+  el.innerHTML = `
+    <div class="sess-header">
+      <div class="sess-back" onclick="startPractice('menu')">←</div>
+      <div class="sess-title">مرور هوشمند</div>
+    </div>
+    <div class="result-screen">
+      <div class="result-emoji">🎉</div>
+      <div class="result-title">عالی!</div>
+      <div class="result-sub">همه کارت‌های امروز رو مرور کردی.<br>فردا دوباره بیا!</div>
+      <button class="btn btn-primary btn-full" style="max-width:260px" onclick="startPractice('flash')">🃏 فلش‌کارت بزن</button>
+    </div>`;
+}
+
+// ── Session router ──
+function renderPracticeSession(el) {
+  if (PS.idx >= PS.queue.length) { renderResult(el); return; }
+  const card = PS.queue[PS.idx];
+  const prog = PS.total ? Math.round((PS.idx / PS.total)*100) : 0;
+  const header = `
+    <div class="sess-header">
+      <div class="sess-back" onclick="startPractice('menu')">←</div>
+      <div class="sess-title">${PS.mode==='srs'?'مرور هوشمند':PS.mode==='flash'?'فلش‌کارت':PS.mode==='quiz'?'آزمون':'دیکته'}</div>
+      <div class="sess-count">${PS.idx+1}/${PS.total}</div>
+    </div>
+    <div class="sess-prog"><div class="sess-prog-fill" style="width:${prog}%"></div></div>`;
+  if (PS.mode === 'flash' || PS.mode === 'srs') renderFlashCard(el, card, header);
+  else if (PS.mode === 'quiz') renderQuiz(el, card, header);
+  else renderTyping(el, card, header);
+}
+
+// ── Flashcard ──
+function renderFlashCard(el, card, header) {
+  PS.flipped = false;
+  el.innerHTML = `${header}
+    <div class="flash-wrap">
+      <div class="flash-scene">
+        <div class="flash-card" id="fc" onclick="flipCard()">
+          <div class="flash-face flash-front">
+            <div class="flash-label">آلمانی</div>
+            <div class="flash-de">${card.de}</div>
+            ${card.pro?`<div class="flash-pro">[ ${card.pro} ]</div>`:''}
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="vc-btn vc-btn-audio" onclick="event.stopPropagation();speak('${card.de.replace(/'/g,"\\'")}')">🔊</button>
+              <span class="chip ${card.level}">${card.level!=='all'?card.level.toUpperCase():''}</span>
+              <span class="chip" style="font-size:10px">${card.cat||''}</span>
+            </div>
+          </div>
+          <div class="flash-face flash-back">
+            <div class="flash-label">فارسی</div>
+            <div class="flash-fa">${card.fa}</div>
+            ${card.notes?`<div class="flash-notes">💡 ${card.notes}</div>`:''}
+          </div>
+        </div>
+      </div>
+      <div class="flash-hint" id="fc-hint">👆 تپ کن تا ترجمه ببینی</div>
+      <div class="rating-row" id="rating-row" style="display:none">
+        <button class="rate-btn rate-again" onclick="rateCard(1)"><span class="rate-icon">😵</span>دوباره</button>
+        <button class="rate-btn rate-hard"  onclick="rateCard(2)"><span class="rate-icon">😓</span>سخت</button>
+        <button class="rate-btn rate-good"  onclick="rateCard(3)"><span class="rate-icon">😊</span>خوب</button>
+        <button class="rate-btn rate-easy"  onclick="rateCard(4)"><span class="rate-icon">🚀</span>آسان</button>
+      </div>
+      ${PS.flipped?'':``}
+    </div>`;
+}
+
+function flipCard() {
+  const fc = document.getElementById('fc');
+  if (!fc) return;
+  PS.flipped = !PS.flipped;
+  fc.classList.toggle('flipped', PS.flipped);
+  if (PS.flipped) {
+    const hint = document.getElementById('fc-hint');
+    const rr   = document.getElementById('rating-row');
+    if (hint) hint.textContent = '↑ چقدر بلد بودی؟';
+    if (rr)   rr.style.display = 'flex';
+    speak(PS.queue[PS.idx]?.de || '');
+  }
+}
+
+function rateCard(rating) {
+  const card = PS.queue[PS.idx];
+  if (card) updateSRS(card.id, rating);
+  if (rating >= 3) PS.score++;
+  PS.idx++;
+  const el = document.getElementById('practice-content');
+  if (el) renderPracticeSession(el);
+}
+
+// ── Quiz ──
+function renderQuiz(el, card, header) {
+  // Build 3 wrong answers from same type
+  const pool = S.VOCAB.filter(v => v.id !== card.id && v.type === card.type);
+  const wrong = pool.sort(() => Math.random()-.5).slice(0,3);
+  const opts = [card, ...wrong].sort(() => Math.random()-.5);
+  el.innerHTML = `${header}
+    <div class="quiz-wrap">
+      <div class="quiz-q-card">
+        <div class="quiz-q-label">ترجمه فارسی این جمله چیه؟</div>
+        <div class="quiz-q-text">${card.de}</div>
+        ${card.pro?`<div class="quiz-q-pro">[ ${card.pro} ]</div>`:''}
+        <div style="margin-top:10px">
+          <button class="vc-btn vc-btn-audio" onclick="speak('${card.de.replace(/'/g,"\\'")}')">🔊 بشنو</button>
+        </div>
+      </div>
+      <div class="quiz-options">
+        ${opts.map((o,i) => `<div class="quiz-opt" id="qo-${i}" onclick="answerQuiz(${i},'${o.id}','${card.id}')">${o.fa}</div>`).join('')}
+      </div>
+      <button class="btn btn-ghost btn-full quiz-next-btn" id="quiz-next" style="display:none" onclick="nextQuiz()">بعدی ←</button>
+    </div>`;
+}
+
+function answerQuiz(idx, chosenId, correctId) {
+  // Disable all opts
+  document.querySelectorAll('.quiz-opt').forEach(o => o.style.pointerEvents='none');
+  const isCorrect = chosenId === correctId;
+  document.getElementById('qo-'+idx)?.classList.add(isCorrect?'correct':'wrong');
+  if (!isCorrect) {
+    // highlight correct
+    document.querySelectorAll('.quiz-opt').forEach((o,i) => {
+      if (o.getAttribute('onclick')?.includes(`'${correctId}','${correctId}'`) || false) {}
+    });
+    // find correct by id attr
+    const opts = document.querySelectorAll('.quiz-opt');
+    opts.forEach((o,i) => {
+      const oc = o.getAttribute('onclick');
+      if (oc && oc.includes(`'${correctId}','${correctId}'`)) o.classList.add('correct');
+    });
+  }
+  updateSRS(correctId, isCorrect?3:1);
+  if (isCorrect) PS.score++;
+  markLearned(correctId, isCorrect);
+  const nb = document.getElementById('quiz-next');
+  if (nb) nb.style.display = 'block';
+}
+
+function nextQuiz() {
+  PS.idx++;
+  const el = document.getElementById('practice-content');
+  if (el) renderPracticeSession(el);
+}
+
+// ── Typing/Dictation ──
+function renderTyping(el, card, header) {
+  el.innerHTML = `${header}
+    <div class="type-wrap">
+      <div class="type-q-card">
+        <div class="quiz-q-label">این جمله فارسی رو به آلمانی بنویس</div>
+        <div class="type-q-fa">${card.fa}</div>
+        ${card.notes?`<div class="type-q-notes">💡 ${card.notes}</div>`:''}
+        <div style="margin-top:10px">
+          <span class="chip ${card.level}">${card.level!=='all'?card.level.toUpperCase():''}</span>
+          <span class="chip" style="font-size:10px;margin-right:4px">${card.cat||''}</span>
+        </div>
+      </div>
+      <div class="type-input-wrap">
+        <input class="type-input" id="type-inp" type="text" placeholder="آلمانی بنویس..." dir="ltr"
+          autocomplete="off" autocorrect="off" spellcheck="false"
+          onkeydown="if(event.key==='Enter')checkTyping('${card.id}')"/>
+        <div class="type-answer" id="type-ans">✓ ${card.de}</div>
+        <div style="display:flex;gap:8px" id="type-btns">
+          <button class="btn btn-primary" style="flex:1" onclick="checkTyping('${card.id}')">بررسی ✓</button>
+          <button class="btn btn-ghost" onclick="skipTyping('${card.id}')">رد کردن ←</button>
+        </div>
+      </div>
+    </div>`;
+  setTimeout(() => document.getElementById('type-inp')?.focus(), 150);
+}
+
+function checkTyping(correctId) {
+  const inp = document.getElementById('type-inp');
+  if (!inp) return;
+  const card = PS.queue[PS.idx];
+  const userAns = inp.value.trim().toLowerCase();
+  const correct = card.de.trim().toLowerCase();
+  // Fuzzy: ignore punctuation, allow 1-2 char difference
+  const clean = s => s.replace(/[.,!?;:'"()]/g,'').replace(/\s+/g,' ').trim();
+  const isCorrect = clean(userAns) === clean(correct) || levenshtein(clean(userAns), clean(correct)) <= 2;
+  inp.classList.add(isCorrect?'correct':'wrong');
+  const ans = document.getElementById('type-ans');
+  if (ans) { ans.style.display = 'block'; ans.textContent = `✓ ${card.de}`; }
+  const btns = document.getElementById('type-btns');
+  if (btns) btns.innerHTML = `<button class="btn btn-primary btn-full" onclick="nextTyping('${correctId}',${isCorrect?1:0})">بعدی ←</button>`;
+  updateSRS(correctId, isCorrect?3:1);
+  if (isCorrect) { PS.score++; speak(card.de); }
+}
+
+function skipTyping(correctId) {
+  const card = PS.queue[PS.idx];
+  const ans = document.getElementById('type-ans');
+  if (ans) { ans.style.display = 'block'; }
+  const btns = document.getElementById('type-btns');
+  if (btns) btns.innerHTML = `<button class="btn btn-ghost btn-full" onclick="nextTyping('${correctId}',0)">بعدی ←</button>`;
+}
+
+function nextTyping(id, correct) {
+  PS.idx++;
+  const el = document.getElementById('practice-content');
+  if (el) renderPracticeSession(el);
+}
+
+// Levenshtein distance for fuzzy matching
+function levenshtein(a, b) {
+  const m = a.length, n = b.length;
+  const dp = Array.from({length:m+1}, (_,i) => Array.from({length:n+1}, (_,j) => i?j?0:j:i));
+  for(let i=1;i<=m;i++) for(let j=1;j<=n;j++)
+    dp[i][j] = a[i-1]===b[j-1] ? dp[i-1][j-1] : 1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);
+  return dp[m][n];
+}
+
+// ── Result Screen ──
+function renderResult(el) {
+  const pct = PS.total ? Math.round((PS.score/PS.total)*100) : 0;
+  const emoji = pct>=80?'🏆':pct>=60?'😊':pct>=40?'😅':'💪';
+  const msg   = pct>=80?'عالی! داری پیشرفت می‌کنی!':pct>=60?'خوب بود! ادامه بده':pct>=40?'بد نبود، تمرین بیشتر!':'تمرین کلید موفقیته!';
+  el.innerHTML = `
+    <div class="sess-header">
+      <div class="sess-back" onclick="startPractice('menu')">←</div>
+      <div class="sess-title">نتیجه</div>
+    </div>
+    <div class="result-screen">
+      <div class="result-emoji">${emoji}</div>
+      <div class="result-title">${msg}</div>
+      <div class="result-stats">
+        <div class="result-stat"><div class="result-stat-val">${PS.score}</div><div class="result-stat-lbl">درست</div></div>
+        <div class="result-stat"><div class="result-stat-val">${PS.total-PS.score}</div><div class="result-stat-lbl">غلط</div></div>
+        <div class="result-stat"><div class="result-stat-val">${pct}%</div><div class="result-stat-lbl">دقت</div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;width:100%;max-width:320px">
+        <button class="btn btn-primary btn-full" onclick="startPractice('${PS.mode}')">🔁 دوباره</button>
+        <button class="btn btn-ghost btn-full" onclick="startPractice('menu')">← برگشت به تمرین</button>
+      </div>
+    </div>`;
+  // Update session done count
+  S.sessionDone += PS.score;
+  saveState();
+  if (S.view === 'home') renderHome();
+}
+
+// ═══════════════════════════════════════════
+//  PART 2 — VOCABULARY DATA
+//  Structure: {id, de, fa, pro, type, level, cat, notes}
+//  type: grammar | hoch | umgang | fuhrerschein
+//  level: b1 | b2 | c1 | c2 | all
+// ═══════════════════════════════════════════
+S.VOCAB = [
+
+// ────────────────────────────────────────
+//  GRAMMATIK — B1
+// ────────────────────────────────────────
+{id:'g_b1_01',de:'Wenn ich Zeit hätte, würde ich mehr lesen.',fa:'اگر وقت داشتم، بیشتر می‌خواندم.',pro:'ven ɪç tsaɪt hɛtə, vʏrdə ɪç meːɐ leːzən',type:'grammar',level:'b1',cat:'Konjunktiv II',notes:'کونیونکتیو ۲ — شرط غیرواقعی در زمان حال'},
+{id:'g_b1_02',de:'Könnten Sie mir bitte helfen?',fa:'آیا می‌توانید لطفاً به من کمک کنید؟',pro:'kœntən ziː miːɐ bɪtə hɛlfən',type:'grammar',level:'b1',cat:'Konjunktiv II',notes:'درخواست مؤدبانه با کونیونکتیو ۲'},
+{id:'g_b1_03',de:'Das Buch wird gerade gelesen.',fa:'کتاب الان دارد خوانده می‌شود.',pro:'das buːx vɪʁt gəˈʁaːdə gəˈleːzən',type:'grammar',level:'b1',cat:'Passiv',notes:'پاسیو حال — Präsens Passiv'},
+{id:'g_b1_04',de:'Das Haus wurde 1990 gebaut.',fa:'خانه در سال ۱۹۹۰ ساخته شد.',pro:'das haʊs vʊʁdə nɔɪntsɪn hʊndɐt noɪntsɪç gəˈbaʊt',type:'grammar',level:'b1',cat:'Passiv',notes:'پاسیو گذشته — Präteritum Passiv'},
+{id:'g_b1_05',de:'Das ist der Mann, der Deutsch spricht.',fa:'این مردی است که آلمانی صحبت می‌کند.',pro:'das ɪst deːɐ man, deːɐ dɔɪtʃ ʃpʁɪçt',type:'grammar',level:'b1',cat:'Relativsatz',notes:'جمله وصفی — نقش فاعلی (Nominativ)'},
+{id:'g_b1_06',de:'Das ist die Frau, die ich kenne.',fa:'این زنی است که می‌شناسم.',pro:'das ɪst diː fʁaʊ, diː ɪç kɛnə',type:'grammar',level:'b1',cat:'Relativsatz',notes:'جمله وصفی — نقش مفعولی (Akkusativ)'},
+{id:'g_b1_07',de:'Das ist der Freund, dem ich geholfen habe.',fa:'این دوستی است که به او کمک کردم.',pro:'das ɪst deːɐ fʁɔɪnt, deːm ɪç gəˈhɔlfən haːbə',type:'grammar',level:'b1',cat:'Relativsatz',notes:'جمله وصفی — نقش غیرمستقیم (Dativ)'},
+{id:'g_b1_08',de:'Ich versuche, jeden Tag Deutsch zu lernen.',fa:'سعی می‌کنم هر روز آلمانی یاد بگیرم.',pro:'ɪç fɛɐˈzuːxə, jeːdən taːk dɔɪtʃ tsuː lɛʁnən',type:'grammar',level:'b1',cat:'Infinitiv mit zu',notes:'Infinitiv با zu — بعد از فعل versuchen'},
+{id:'g_b1_09',de:'Sie hat aufgehört zu rauchen.',fa:'او سیگار کشیدن را متوقف کرد.',pro:'ziː hat ˈaʊfgəhøːɐt tsuː ˈʁaʊxən',type:'grammar',level:'b1',cat:'Infinitiv mit zu',notes:'بعد از aufhören حتماً zu می‌آید'},
+{id:'g_b1_10',de:'Während er arbeitete, hörte er Musik.',fa:'در حالی که کار می‌کرد، موزیک گوش داد.',pro:'vɛːʁənt eːɐ ˈaʁbaɪtətə, høːɐtə eːɐ muˈziːk',type:'grammar',level:'b1',cat:'Temporalsatz',notes:'während — همزمانی دو عمل'},
+{id:'g_b1_11',de:'Nachdem sie gegessen hatten, gingen sie spazieren.',fa:'بعد از اینکه خوردند، قدم زدند.',pro:'naːxdeːm ziː gəˈgɛsən hatən, gɪŋən ziː ʃpaˈtsiːʁən',type:'grammar',level:'b1',cat:'Temporalsatz',notes:'nachdem — دو زمان متفاوت، Plusquamperfekt قبلی‌تر'},
+{id:'g_b1_12',de:'Bevor er schläft, liest er immer.',fa:'قبل از اینکه بخوابد، همیشه می‌خواند.',pro:'bəˈfoːɐ eːɐ ʃlɛːft, liːst eːɐ ˈɪmɐ',type:'grammar',level:'b1',cat:'Temporalsatz',notes:'bevor — قبل از یک عمل'},
+{id:'g_b1_13',de:'Weil es regnet, bleibe ich zu Hause.',fa:'چون باران می‌بارد، خانه می‌مانم.',pro:'vaɪl ɛs ˈʁeːgnət, ˈblaɪbə ɪç tsuː ˈhaʊzə',type:'grammar',level:'b1',cat:'Kausalsatz',notes:'weil — علت، فعل به آخر جمله می‌رود'},
+{id:'g_b1_14',de:'Da er krank war, blieb er zu Hause.',fa:'چون مریض بود، خانه ماند.',pro:'daː eːɐ kʁaŋk vaːɐ, bliːp eːɐ tsuː ˈhaʊzə',type:'grammar',level:'b1',cat:'Kausalsatz',notes:'da — علت، معمولاً اطلاعات قبلاً مشخص است'},
+{id:'g_b1_15',de:'Obwohl es regnet, geht sie spazieren.',fa:'با اینکه باران می‌بارد، قدم می‌زند.',pro:'ɔpˈvoːl ɛs ˈʁeːgnət, geːt ziː ʃpaˈtsiːʁən',type:'grammar',level:'b1',cat:'Konzessivsatz',notes:'obwohl — تضاد/امتیاز — فعل به آخر'},
+{id:'g_b1_16',de:'Sowohl er als auch sie sprechen Deutsch.',fa:'هم او و هم او آلمانی صحبت می‌کنند.',pro:'zoːvoːl eːɐ als aʊx ziː ˈʃpʁɛçən dɔɪtʃ',type:'grammar',level:'b1',cat:'Konnektoren',notes:'sowohl...als auch — هر دو را شامل می‌شود'},
+{id:'g_b1_17',de:'Entweder kommst du mit, oder ich gehe alleine.',fa:'یا با من می‌آیی، یا تنها می‌روم.',pro:'ɛntˈveːdɐ kɔmst duː mɪt, ˈoːdɐ ɪç ˈgeːə aˈlaɪnə',type:'grammar',level:'b1',cat:'Konnektoren',notes:'entweder...oder — یکی از دو حالت'},
+{id:'g_b1_18',de:'Ich lasse das Auto reparieren.',fa:'ماشین را می‌دهم تعمیر کنند.',pro:'ɪç ˈlasə das ˈaʊtoː ʁepaˈʁiːʁən',type:'grammar',level:'b1',cat:'lassen',notes:'lassen + Infinitiv — دادن کاری به دیگری'},
+{id:'g_b1_19',de:'Je mehr ich lerne, desto besser werde ich.',fa:'هر چه بیشتر یاد بگیرم، بهتر می‌شوم.',pro:'jeː meːɐ ɪç lɛʁnə, ˈdɛsto ˈbɛsɐ ˈveːɐdə ɪç',type:'grammar',level:'b1',cat:'Komparativsatz',notes:'je...desto — رابطه متناسب'},
+{id:'g_b1_20',de:'Ich habe keine Lust, heute auszugehen.',fa:'امروز دلم نمی‌خواهد بیرون بروم.',pro:'ɪç haːbə ˈkaɪnə lʊst, ˈhɔɪtə ˈaʊstsugəˌheːən',type:'grammar',level:'b1',cat:'Infinitiv mit zu',notes:'Lust haben zu + Infinitiv'},
+
+// ────────────────────────────────────────
+//  GRAMMATIK — B2
+// ────────────────────────────────────────
+{id:'g_b2_01',de:'Er sagte, er sei krank und könne nicht kommen.',fa:'گفت که مریض است و نمی‌تواند بیاید.',pro:'eːɐ ˈzaːktə, eːɐ zaɪ kʁaŋk ʊnt kœnə nɪçt ˈkɔmən',type:'grammar',level:'b2',cat:'Konjunktiv I',notes:'کونیونکتیو ۱ — نقل قول غیرمستقیم'},
+{id:'g_b2_02',de:'Laut Bericht sei die Lage kritisch.',fa:'طبق گزارش، وضعیت بحرانی است.',pro:'laʊt bəˈʁɪçt zaɪ diː ˈlaːgə ˈkʁɪtɪʃ',type:'grammar',level:'b2',cat:'Konjunktiv I',notes:'در متون خبری — بدون نقل قول مستقیم'},
+{id:'g_b2_03',de:'Das muss sofort gemacht werden.',fa:'این باید فوری انجام شود.',pro:'das mʊs zoˈfɔʁt gəˈmaxt ˈveːɐdən',type:'grammar',level:'b2',cat:'Passiv mit Modal',notes:'پاسیو + فعل کمکی — تکلیف و اجبار'},
+{id:'g_b2_04',de:'Das darf hier nicht geraucht werden.',fa:'اینجا اجازه سیگار کشیدن نیست.',pro:'das daʁf hiːɐ nɪçt gəˈʁaʊxt ˈveːɐdən',type:'grammar',level:'b2',cat:'Passiv mit Modal',notes:'ممنوعیت با پاسیو'},
+{id:'g_b2_05',de:'Die auf dem Tisch liegende Zeitung gehört mir.',fa:'روزنامه‌ای که روی میز است، مال من است.',pro:'diː aʊf deːm tɪʃ ˈliːgəndə ˈtsaɪtʊŋ gəˈhøːɐt miːɐ',type:'grammar',level:'b2',cat:'Partizipialkonstruktion',notes:'Partizip I به عنوان صفت — جمله وصفی فشرده'},
+{id:'g_b2_06',de:'Das von ihm geschriebene Buch ist ein Bestseller.',fa:'کتابی که توسط او نوشته شده، پرفروش است.',pro:'das fɔn iːm gəˈʃʁiːbənə buːx ɪst aɪn ˈbɛstsɛlɐ',type:'grammar',level:'b2',cat:'Partizipialkonstruktion',notes:'Partizip II به عنوان صفت'},
+{id:'g_b2_07',de:'Das Lesen macht mir Freude.',fa:'خواندن به من لذت می‌دهد.',pro:'das ˈleːzən maxt miːɐ ˈfʁɔɪdə',type:'grammar',level:'b2',cat:'Nominalisierung',notes:'مصدر اسم‌شده — با حرف تعریف das'},
+{id:'g_b2_08',de:'Trotz des schlechten Wetters gingen wir wandern.',fa:'علی‌رغم هوای بد، پیاده‌روی کردیم.',pro:'tʁoːts dɛs ˈʃlɛçtən ˈvɛtɐs gɪŋən viːɐ ˈvandɐn',type:'grammar',level:'b2',cat:'Konzessiv Präposition',notes:'trotz + Genitiv — بدون جمله‌واره'},
+{id:'g_b2_09',de:'Komm doch mal vorbei!',fa:'یه بار بیا پیشم!',pro:'kɔm dɔx maːl foːɐˈbaɪ',type:'grammar',level:'b2',cat:'Modalpartikeln',notes:'doch — تأکید دعوت یا درخواست'},
+{id:'g_b2_10',de:'Das ist halt so, da kann man nichts machen.',fa:'خب اینطوریه، کاری نمیشه کرد.',pro:'das ɪst halt zoː, daː kan man nɪçts ˈmaxən',type:'grammar',level:'b2',cat:'Modalpartikeln',notes:'halt/eben — پذیرفتن واقعیت ناخوشایند'},
+{id:'g_b2_11',de:'Das wäre eigentlich eine gute Idee.',fa:'این اصلاً یک ایده خوب بود.',pro:'das vɛːʁə ˈaɪgəntlɪç ˈaɪnə ˈgʊtə iˈdeːə',type:'grammar',level:'b2',cat:'Modalpartikeln',notes:'eigentlich — در اصل، بیان انتظار'},
+{id:'g_b2_12',de:'In Betracht ziehen, eine Alternative zu finden.',fa:'در نظر گرفتن یافتن یک جایگزین.',pro:'ɪn bəˈtʁaxt ˈtsiːən, ˈaɪnə altɛʁnaˈtiːvə tsuː ˈfɪndən',type:'grammar',level:'b2',cat:'Funktionsverbgefüge',notes:'in Betracht ziehen = berücksichtigen'},
+{id:'g_b2_13',de:'Zur Verfügung stellen bedeutet, etwas zugänglich machen.',fa:'در دسترس قرار دادن یعنی چیزی را قابل دسترس کردن.',pro:'tsuːɐ fɛɐˈfyːgʊŋ ˈʃtɛlən',type:'grammar',level:'b2',cat:'Funktionsverbgefüge',notes:'zur Verfügung stellen = bereitstellen'},
+{id:'g_b2_14',de:'Anstatt zu klagen, sollte man handeln.',fa:'به جای اینکه شکایت کنی، باید اقدام کنی.',pro:'ˈanʃtat tsuː ˈklaːgən, ˈzɔltə man ˈhandəln',type:'grammar',level:'b2',cat:'Infinitivkonstruktionen',notes:'anstatt zu + Infinitiv — جایگزین Anstatt dass'},
+{id:'g_b2_15',de:'Ohne zu fragen, nahm er das Buch.',fa:'بدون اینکه بپرسد، کتاب را برداشت.',pro:'ˈoːnə tsuː ˈfʁaːgən, naːm eːɐ das buːx',type:'grammar',level:'b2',cat:'Infinitivkonstruktionen',notes:'ohne zu + Infinitiv — بدون انجام دادن چیزی'},
+{id:'g_b2_16',de:'Um fit zu bleiben, treibt sie täglich Sport.',fa:'برای اینکه تناسب اندام داشته باشد، هر روز ورزش می‌کند.',pro:'ʊm fɪt tsuː ˈblaɪbən, tʁaɪpt ziː ˈtɛːklɪç ʃpɔʁt',type:'grammar',level:'b2',cat:'Infinitivkonstruktionen',notes:'um...zu + Infinitiv — هدف و منظور'},
+{id:'g_b2_17',de:'Wohingegen er faul ist, ist sie sehr fleißig.',fa:'در حالی که او تنبل است، او خیلی تلاشگر است.',pro:'voˈhɪŋeːgən eːɐ faʊl ɪst, ɪst ziː zeːɐ ˈflaɪsɪç',type:'grammar',level:'b2',cat:'Adversativsatz',notes:'wohingegen — تضاد، جایگزین während'},
+{id:'g_b2_18',de:'Das Problem liegt darin, dass niemand zuhört.',fa:'مشکل اینجاست که کسی گوش نمی‌دهد.',pro:'das pʁoˈbleːm liːkt daˈʁɪn, das ˈniːmant ˈtsuːhøːɐt',type:'grammar',level:'b2',cat:'Pronominaladverb',notes:'darin, dass — da- ترکیب با حرف اضافه'},
+
+// ────────────────────────────────────────
+//  GRAMMATIK — C1
+// ────────────────────────────────────────
+{id:'g_c1_01',de:'Wenn er früher gekommen wäre, hätten wir ihn gesehen.',fa:'اگر زودتر آمده بود، او را می‌دیدیم.',pro:'vɛn eːɐ ˈfʁyːɐ ˈkɔmən vɛːʁə, hɛtən viːɐ iːn geˈzeːən',type:'grammar',level:'c1',cat:'Irreale Vergangenheit',notes:'شرط غیرواقعی گذشته — Plusquamperfekt Konjunktiv'},
+{id:'g_c1_02',de:'Das ist zu bedenken.',fa:'این باید در نظر گرفته شود.',pro:'das ɪst tsuː bəˈdɛŋkən',type:'grammar',level:'c1',cat:'sein + zu + Infinitiv',notes:'جایگزین پاسیو — بیان تکلیف یا امکان'},
+{id:'g_c1_03',de:'Das ist nicht zu leugnen.',fa:'این قابل انکار نیست.',pro:'das ɪst nɪçt tsuː ˈlɔɪgnən',type:'grammar',level:'c1',cat:'sein + zu + Infinitiv',notes:'با نفی — چیزی که ممکن نیست'},
+{id:'g_c1_04',de:'Er hat schlafen wollen, aber konnte nicht.',fa:'می‌خواست بخوابد، اما نتوانست.',pro:'eːɐ hat ˈʃlaːfən ˈvɔlən, aːbɐ ˈkɔntə nɪçt',type:'grammar',level:'c1',cat:'Doppelter Infinitiv',notes:'Infinitiv مضاعف — فعل کمکی + مدال در Perfekt'},
+{id:'g_c1_05',de:'Die in letzter Zeit zunehmend diskutierte Frage...',fa:'سوالی که در اخیر به‌طور فزاینده‌ای مطرح شده...',pro:'diː ɪn ˈlɛtstɐ tsaɪt tsuˈneːmənt dɪskuˈtiːɐtə ˈfʁaːgə',type:'grammar',level:'c1',cat:'Erweitertes Partizipialattribut',notes:'صفت مشارکتی گسترش‌یافته — جملات آکادمیک'},
+{id:'g_c1_06',de:'Wenngleich die Lage schwierig ist, gibt es Hoffnung.',fa:'هرچند وضعیت دشوار است، امید وجود دارد.',pro:'vɛnˈglaɪç diː ˈlaːgə ˈʃviːʁɪç ɪst, gɪpt ɛs ˈhɔfnʊŋ',type:'grammar',level:'c1',cat:'Konzessivkonnektoren',notes:'wenngleich — رسمی‌تر از obwohl'},
+{id:'g_c1_07',de:'Ungeachtet der Schwierigkeiten setzte er fort.',fa:'صرف نظر از مشکلات، ادامه داد.',pro:'ʊngəˈaxtət deːɐ ˈʃviːʁɪçkaɪtən ˈzɛtstə eːɐ fɔʁt',type:'grammar',level:'c1',cat:'Konzessivkonnektoren',notes:'ungeachtet + Genitiv — بسیار رسمی'},
+{id:'g_c1_08',de:'Diesbezüglich möchte ich anmerken, dass...',fa:'در این رابطه می‌خواهم اشاره کنم که...',pro:'diːsbəˈtsyːklɪç ˈmœçtə ɪç ˈanmɛʁkən, das',type:'grammar',level:'c1',cat:'Akademische Sprache',notes:'zبیان علمی و رسمی'},
+{id:'g_c1_09',de:'Es gilt zu beachten, dass die Regel gilt.',fa:'باید توجه داشت که این قانون اعمال می‌شود.',pro:'ɛs gɪlt tsuː bəˈaxtən, das diː ˈʁeːgəl gɪlt',type:'grammar',level:'c1',cat:'Akademische Sprache',notes:'es gilt zu — بیان رسمی یک تکلیف'},
+{id:'g_c1_10',de:'Dem ist entgegenzuhalten, dass...',fa:'در مقابل این باید گفت که...',pro:'deːm ɪst ɛntˈgeːgəntsuhaltən, das',type:'grammar',level:'c1',cat:'Akademische Sprache',notes:'استفاده در بحث و آرگومان‌سازی'},
+{id:'g_c1_11',de:'Je nachdem, ob es regnet, gehen wir raus oder nicht.',fa:'بسته به اینکه باران ببارد یا نه، بیرون می‌رویم یا نه.',pro:'jeː naːxdeːm, ɔb ɛs ˈʁeːgnət',type:'grammar',level:'c1',cat:'je nachdem',notes:'je nachdem ob/wie — بسته به شرایط'},
+{id:'g_c1_12',de:'Abgesehen davon, dass er krank war, fehlte auch Zeit.',fa:'جدای از اینکه مریض بود، وقت هم کم بود.',pro:'ˈapgəzeːən daˈfɔn, das eːɐ kʁaŋk vaːɐ',type:'grammar',level:'c1',cat:'Präpositionalphrasen',notes:'abgesehen davon, dass — علاوه بر'},
+
+// ────────────────────────────────────────
+//  GRAMMATIK — C2
+// ────────────────────────────────────────
+{id:'g_c2_01',de:'Hätte er das gewusst, so wäre alles anders gelaufen.',fa:'اگر این را می‌دانست، همه چیز متفاوت پیش می‌رفت.',pro:'hɛtə eːɐ das gəˈvʊst, zoː vɛːʁə ˈalɛs ˈandɐs gəˈlaʊfən',type:'grammar',level:'c2',cat:'Irreale Periode',notes:'شرط بدون wenn — بسیار رسمی و ادبی'},
+{id:'g_c2_02',de:'Wäre ich an seiner Stelle, handelte ich anders.',fa:'اگر جای او بودم، متفاوت عمل می‌کردم.',pro:'vɛːʁə ɪç an ˈzaɪnɐ ˈʃtɛlə, ˈhandəltə ɪç ˈandɐs',type:'grammar',level:'c2',cat:'Irreale Periode',notes:'وارونگی جمله شرطی — بدون wenn'},
+{id:'g_c2_03',de:'Es wäre an der Zeit, dass man handelt.',fa:'وقتش رسیده که اقدام شود.',pro:'ɛs vɛːʁə an deːɐ tsaɪt, das man ˈhandəlt',type:'grammar',level:'c2',cat:'C2 Ausdrücke',notes:'an der Zeit sein — وقتش رسیده'},
+{id:'g_c2_04',de:'Kaum hatte er das gesagt, klingelte das Telefon.',fa:'به محض اینکه این را گفت، تلفن زنگ خورد.',pro:'kaʊm ˈhatə eːɐ das gəˈzaːkt, ˈklɪŋəltə das teleˈfoːn',type:'grammar',level:'c2',cat:'Temporale Konstruktion',notes:'kaum...als/da — بلافاصله بعد از'},
+{id:'g_c2_05',de:'Sei dem wie es wolle, ich bleibe bei meiner Meinung.',fa:'هر چه باشد، بر نظرم ثابت می‌مانم.',pro:'zaɪ deːm viː ɛs ˈvɔlə',type:'grammar',level:'c2',cat:'Konzessiv',notes:'sei dem wie es wolle — عبارت ادبی'},
+
+// ────────────────────────────────────────
+//  SÄTZE — HOCHDEUTSCH (رسمی)
+// ────────────────────────────────────────
+{id:'h_01',de:'Guten Morgen! Wie haben Sie geschlafen?',fa:'صبح بخیر! چطور خوابیدید؟',pro:'guːtən ˈmɔʁgən, viː haːbən ziː gəˈʃlaːfən',type:'hoch',level:'b1',cat:'Begrüßung',notes:'خطاب رسمی با Sie'},
+{id:'h_02',de:'Haben Sie gut hergefunden?',fa:'راحت پیدا کردید؟',pro:'haːbən ziː guːt ˈheːɐgəˌfʊndən',type:'hoch',level:'b1',cat:'Begrüßung',notes:'در جلسه یا موقعیت رسمی'},
+{id:'h_03',de:'Ich habe einen Termin um zehn Uhr.',fa:'ساعت ده وقت دارم.',pro:'ɪç haːbə ˈaɪnən tɛʁˈmiːn ʊm tseːn uːɐ',type:'hoch',level:'b1',cat:'Termine',notes:''},
+{id:'h_04',de:'Könnte ich bitte die Rechnung haben?',fa:'می‌توانم صورتحساب بگیرم؟',pro:'kœntə ɪç bɪtə diː ˈʁɛçnʊŋ haːbən',type:'hoch',level:'b1',cat:'Einkaufen',notes:'درخواست مؤدبانه'},
+{id:'h_05',de:'Darf ich Sie etwas fragen?',fa:'می‌توانم چیزی بپرسم؟',pro:'daʁf ɪç ziː ˈɛtvas ˈfʁaːgən',type:'hoch',level:'b1',cat:'Anfragen',notes:''},
+{id:'h_06',de:'Das ist leider nicht möglich.',fa:'متأسفانه ممکن نیست.',pro:'das ɪst ˈlaɪdɐ nɪçt ˈmøːklɪç',type:'hoch',level:'b1',cat:'Ablehnung',notes:'رد کردن مؤدبانه'},
+{id:'h_07',de:'Ich kümmere mich darum.',fa:'من به آن رسیدگی می‌کنم.',pro:'ɪç ˈkymɐə mɪç daˈʁʊm',type:'hoch',level:'b1',cat:'Arbeit',notes:''},
+{id:'h_08',de:'Meiner Meinung nach ist das eine gute Idee.',fa:'به نظر من این یک ایده خوب است.',pro:'ˈmaɪnɐ ˈmaɪnʊŋ naːx ɪst das ˈaɪnə ˈgʊtə iˈdeːə',type:'hoch',level:'b1',cat:'Meinung',notes:'بیان نظر رسمی'},
+{id:'h_09',de:'Entschuldigung, könnten Sie das wiederholen?',fa:'ببخشید، می‌توانید تکرار کنید؟',pro:'ɛntˈʃʊldɪgʊŋ, kœntən ziː das ˈviːdɐˌhoːlən',type:'hoch',level:'b1',cat:'Verständnis',notes:''},
+{id:'h_10',de:'Ich verstehe Ihr Anliegen vollkommen.',fa:'دغدغه شما را کاملاً درک می‌کنم.',pro:'ɪç fɛɐˈʃteːə iːɐ ˈanliːgən ˈfɔlkɔmən',type:'hoch',level:'b1',cat:'Empathie',notes:'در موقعیت‌های خدماتی'},
+{id:'h_11',de:'Ich würde Sie herzlich einladen.',fa:'صمیمانه شما را دعوت می‌کنم.',pro:'ɪç vʏʁdə ziː ˈhɛʁtslɪç ˈaɪnˌlaːdən',type:'hoch',level:'b2',cat:'Einladung',notes:''},
+{id:'h_12',de:'Ich muss mich leider entschuldigen.',fa:'متأسفانه باید عذرخواهی کنم.',pro:'ɪç mʊs mɪç ˈlaɪdɐ ɛntˈʃʊldɪgən',type:'hoch',level:'b1',cat:'Entschuldigung',notes:''},
+{id:'h_13',de:'Könnten wir einen Termin vereinbaren?',fa:'می‌توانیم وقتی هماهنگ کنیم؟',pro:'kœntən viːɐ ˈaɪnən tɛʁˈmiːn fɛɐˈaɪnbaːʁən',type:'hoch',level:'b1',cat:'Termine',notes:''},
+{id:'h_14',de:'Ich rufe wegen eines Termins an.',fa:'برای هماهنگ کردن وقت زنگ می‌زنم.',pro:'ɪç ˈʁuːfə ˈveːgən ˈaɪnəs tɛʁˈmiːns an',type:'hoch',level:'b1',cat:'Telefon',notes:''},
+{id:'h_15',de:'Das entspricht leider nicht meinen Erwartungen.',fa:'این متأسفانه با انتظاراتم مطابقت ندارد.',pro:'das ɛntˈʃpʁɪçt ˈlaɪdɐ nɪçt ˈmaɪnən ɛɐˈvaʁtʊŋən',type:'hoch',level:'b2',cat:'Beschwerde',notes:'شکایت رسمی'},
+{id:'h_16',de:'Ich hätte diesbezüglich eine Frage.',fa:'در این خصوص یک سوال دارم.',pro:'ɪç hɛtə diːsbəˈtsyːklɪç ˈaɪnə ˈfʁaːgə',type:'hoch',level:'b2',cat:'Anfragen',notes:'بسیار رسمی'},
+{id:'h_17',de:'Das liegt leider außerhalb meines Zuständigkeitsbereichs.',fa:'این متأسفانه خارج از حوزه مسئولیت من است.',pro:'das liːkt ˈlaɪdɐ ˈaʊsɐhalb ˈmaɪnəs tsuˈʃtɛndɪçkaɪtsbeˌʁaɪçs',type:'hoch',level:'b2',cat:'Arbeit',notes:''},
+{id:'h_18',de:'Bitte richten Sie ihm aus, dass ich angerufen habe.',fa:'لطفاً به او بگویید که زنگ زدم.',pro:'bɪtə ˈʁɪçtən ziː iːm aʊs, das ɪç ˈangəˌʁuːfən haːbə',type:'hoch',level:'b1',cat:'Telefon',notes:'پیام رسمی تلفنی'},
+{id:'h_19',de:'An Ihrer Stelle würde ich das überdenken.',fa:'اگر جای شما بودم، دوباره فکر می‌کردم.',pro:'an ˈiːʁɐ ˈʃtɛlə vʏʁdə ɪç das ˈyːbɐdɛŋkən',type:'hoch',level:'b2',cat:'Ratschlag',notes:'پیشنهاد رسمی و دیپلماتیک'},
+{id:'h_20',de:'Ich muss leider absagen.',fa:'متأسفانه باید لغو کنم.',pro:'ɪç mʊs ˈlaɪdɐ ˈapˌzaːgən',type:'hoch',level:'b1',cat:'Absage',notes:''},
+{id:'h_21',de:'Vielen Dank für Ihr Verständnis.',fa:'از درک شما بسیار ممنونم.',pro:'ˈfiːlən daŋk fyːɐ iːɐ fɛɐˈʃtɛndnɪs',type:'hoch',level:'b1',cat:'Dankbarkeit',notes:'خاتمه دادن رسمی به مکالمه'},
+{id:'h_22',de:'Ich freue mich auf unsere Zusammenarbeit.',fa:'از همکاری با شما خوشحالم.',pro:'ɪç ˈfʁɔɪə mɪç aʊf ˈʊnzɐʁə tsuˈzamənˌaʁbaɪt',type:'hoch',level:'b2',cat:'Arbeit',notes:'شروع همکاری'},
+{id:'h_23',de:'Ich bitte um Ihr Verständnis.',fa:'از درک شما خواهش می‌کنم.',pro:'ɪç bɪtə ʊm iːɐ fɛɐˈʃtɛndnɪs',type:'hoch',level:'b2',cat:'Höflichkeit',notes:''},
+{id:'h_24',de:'Das werde ich in Betracht ziehen.',fa:'این را در نظر خواهم گرفت.',pro:'das ˈveːɐdə ɪç ɪn bəˈtʁaxt ˈtsiːən',type:'hoch',level:'b2',cat:'Überlegen',notes:''},
+{id:'h_25',de:'Entschuldigen Sie die Unannehmlichkeit.',fa:'از این ناراحتی پوزش می‌خواهم.',pro:'ɛntˈʃʊldɪgən ziː diː ʊnˈanneːmlɪçkaɪt',type:'hoch',level:'b2',cat:'Entschuldigung',notes:'رسمی‌ترین عذرخواهی'},
+
+// ────────────────────────────────────────
+//  SÄTZE — UMGANGSSPRACHE (غیررسمی)
+// ────────────────────────────────────────
+{id:'u_01',de:'Morgen! Wie war der Schlaf?',fa:'صبح! خواب چطور بود؟',pro:'ˈmɔʁgən! viː vaːɐ deːɐ ʃlaːf',type:'umgang',level:'b1',cat:'Begrüßung',notes:'خطاب خودمانی — بدون Guten'},
+{id:'u_02',de:'Na, wie läuft\'s?',fa:'خب، چطوره؟',pro:'naː, viː lɔɪfts',type:'umgang',level:'b1',cat:'Begrüßung',notes:'na, wie läuft es — کوتاه‌شده'},
+{id:'u_03',de:'Ich hab um 10 nen Termin.',fa:'ساعت ۱۰ وقت دارم.',pro:'ɪç hap ʊm tseːn nən tɛʁˈmiːn',type:'umgang',level:'b1',cat:'Termine',notes:'einen را به nen تبدیل می‌کنند'},
+{id:'u_04',de:'Die Rechnung bitte!',fa:'صورتحساب لطفاً!',pro:'diː ˈʁɛçnʊŋ bɪtə',type:'umgang',level:'b1',cat:'Einkaufen',notes:'مستقیم و سریع'},
+{id:'u_05',de:'Darf ich dich kurz was fragen?',fa:'می‌تونم یه لحظه یه چیزی بپرسم؟',pro:'daʁf ɪç dɪç kʊʁts vas ˈfʁaːgən',type:'umgang',level:'b1',cat:'Anfragen',notes:'etwas → was در محاوره'},
+{id:'u_06',de:'Das geht leider nicht.',fa:'متأسفانه نمیشه.',pro:'das geːt ˈlaɪdɐ nɪçt',type:'umgang',level:'b1',cat:'Ablehnung',notes:'گهت رفتنی کوتاه‌تر از möglich'},
+{id:'u_07',de:'Ich kümmer mich drum.',fa:'بهش رسیدگی می‌کنم.',pro:'ɪç ˈkymɐ mɪç dʁʊm',type:'umgang',level:'b1',cat:'Arbeit',notes:'darum → drum در محاوره'},
+{id:'u_08',de:'Ich find das ne gute Idee.',fa:'به نظرم ایده‌ی خوبیه.',pro:'ɪç fɪnt das neː ˈgʊtə iˈdeːə',type:'umgang',level:'b1',cat:'Meinung',notes:'finde→find، eine→ne'},
+{id:'u_09',de:'Sorry, kannst du das nochmal sagen?',fa:'ببخشید، می‌تونی دوباره بگی؟',pro:'ˈsɔʁi, kanst duː das ˈnɔxmaːl ˈzaːgən',type:'umgang',level:'b1',cat:'Verständnis',notes:'Sorry جایگزین Entschuldigung'},
+{id:'u_10',de:'Ich versteh dich voll.',fa:'کاملاً می‌فهمم.',pro:'ɪç fɛɐˈʃteː dɪç fɔl',type:'umgang',level:'b1',cat:'Empathie',notes:'vollkommen → voll در گفتار'},
+{id:'u_11',de:'Du bist herzlich eingeladen!',fa:'دعوتی!',pro:'duː bɪst ˈhɛʁtslɪç ˈaɪngəˌlaːdən',type:'umgang',level:'b1',cat:'Einladung',notes:''},
+{id:'u_12',de:'Hey, tut mir leid!',fa:'هی، ببخشید!',pro:'heɪ, tuːt miːɐ laɪt',type:'umgang',level:'b1',cat:'Entschuldigung',notes:'لحن خودمانی‌تر'},
+{id:'u_13',de:'Wann passt es dir?',fa:'کِی برات ممکنه؟',pro:'van past ɛs diːɐ',type:'umgang',level:'b1',cat:'Termine',notes:''},
+{id:'u_14',de:'Ich ruf wegen nem Termin an.',fa:'برای وقت زنگ می‌زنم.',pro:'ɪç ʁuːf ˈveːgən neːm tɛʁˈmiːn an',type:'umgang',level:'b1',cat:'Telefon',notes:'einem → nem، rufe → ruf'},
+{id:'u_15',de:'Das hab ich mir anders vorgestellt.',fa:'این رو جور دیگه‌ای تصور کرده بودم.',pro:'das hap ɪç miːɐ ˈandɐs ˈfoːɐgəˌʃtɛlt',type:'umgang',level:'b1',cat:'Beschwerde',notes:'شکایت ملایم‌تر'},
+{id:'u_16',de:'Dazu hab ich noch ne Frage.',fa:'یه سوال هم دارم.',pro:'daˈtsuː hap ɪç nɔx neː ˈfʁaːgə',type:'umgang',level:'b1',cat:'Anfragen',notes:''},
+{id:'u_17',de:'Dafür bin ich nicht zuständig.',fa:'این به من ربطی نداره.',pro:'daˈfyːɐ bɪn ɪç nɪçt tsuˈʃtɛndɪç',type:'umgang',level:'b1',cat:'Arbeit',notes:''},
+{id:'u_18',de:'Sag ihm bitte, dass ich angerufen hab.',fa:'بهش بگو که زنگ زدم.',pro:'zaːk iːm bɪtə, das ɪç ˈangəˌʁuːfən hap',type:'umgang',level:'b1',cat:'Telefon',notes:'hab → habe در محاوره'},
+{id:'u_19',de:'An deiner Stelle würd ich das lassen.',fa:'اگه جات بودم ولش می‌کردم.',pro:'an ˈdaɪnɐ ˈʃtɛlə vʏʁt ɪç das ˈlasən',type:'umgang',level:'b1',cat:'Ratschlag',notes:'würde → würd'},
+{id:'u_20',de:'Ich kann leider nicht kommen.',fa:'متأسفانه نمی‌تونم بیام.',pro:'ɪç kan ˈlaɪdɐ nɪçt ˈkɔmən',type:'umgang',level:'b1',cat:'Absage',notes:''},
+{id:'u_21',de:'Danke vielmals!',fa:'خیلی ممنون!',pro:'ˈdaŋkə ˈfiːlmaːls',type:'umgang',level:'b1',cat:'Dankbarkeit',notes:''},
+{id:'u_22',de:'Wir arbeiten super zusammen!',fa:'خیلی عالی با هم کار می‌کنیم!',pro:'viːɐ ˈaʁbaɪtən ˈzuːpɐ tsuˈzamən',type:'umgang',level:'b1',cat:'Arbeit',notes:''},
+{id:'u_23',de:'Kein Stress, ist alles gut.',fa:'استرس نداشته باش، همه چیز خوبه.',pro:'kaɪn ʃtʁɛs, ɪst ˈalɛs guːt',type:'umgang',level:'b1',cat:'Beruhigung',notes:''},
+{id:'u_24',de:'Das ist mir egal.',fa:'برام مهم نیست.',pro:'das ɪst miːɐ eˈgaːl',type:'umgang',level:'b1',cat:'Gleichgültigkeit',notes:''},
+{id:'u_25',de:'Das geht mir auf die Nerven!',fa:'اعصابم رو خرد می‌کنه!',pro:'das geːt miːɐ aʊf diː ˈnɛʁfən',type:'umgang',level:'b1',cat:'Gefühle',notes:'عبارت معروف برای اذیت شدن'},
+{id:'u_26',de:'Ich drück dir die Daumen!',fa:'شانس می‌خوام برات!',pro:'ɪç dʁyk diːɐ diː ˈdaʊmən',type:'umgang',level:'b1',cat:'Wünsche',notes:'معادل fingers crossed'},
+{id:'u_27',de:'Das läuft wie geschmiert.',fa:'مثل ساعت کار می‌کنه.',pro:'das lɔɪft viː gəˈʃmiːɐt',type:'umgang',level:'b2',cat:'Redewendungen',notes:'geschmiert = روغن‌کاری‌شده'},
+{id:'u_28',de:'Ich bin total am Ende.',fa:'کاملاً دیگه نمانده.',pro:'ɪç bɪn toˈtaːl am ˈɛndə',type:'umgang',level:'b1',cat:'Müdigkeit',notes:'am Ende = تموم شدن انرژی'},
+{id:'u_29',de:'Ich überleg\'s mir nochmal.',fa:'یه بار دیگه فکر می‌کنم.',pro:'ɪç ˈyːbɐleːks miːɐ ˈnɔxmaːl',type:'umgang',level:'b1',cat:'Überlegen',notes:''},
+{id:'u_30',de:'Alles klar?',fa:'همه چیز اوکیه؟',pro:'ˈalɛs klaːɐ',type:'umgang',level:'b1',cat:'Begrüßung',notes:''},
+{id:'f_vz_01',de:'Gefahrstelle',fa:'تابلوی خطر عمومی',pro:'gəˈfaːɐʃtɛlə',type:'fuhrerschein',level:'all',cat:'Verkehrszeichen',notes:'مثلث قرمز — هشدار خطر نامشخص'},
+{id:'f_vz_02',de:'Schleudergefahr',fa:'خطر لغزیدن',pro:'ˈʃlɔɪdɐgəˌfaːɐ',type:'fuhrerschein',level:'all',cat:'Verkehrszeichen',notes:'جاده لغزنده — در باران و یخ'},
+{id:'f_vz_03',de:'Steinschlag',fa:'ریزش سنگ',pro:'ˈʃtaɪnˌʃlaːk',type:'fuhrerschein',level:'all',cat:'Verkehrszeichen',notes:''},
+{id:'f_vz_04',de:'Vorfahrt gewähren',fa:'حق تقدم بدهید',pro:'ˈfoːɐfaːɐt gəˈvɛːʁən',type:'fuhrerschein',level:'all',cat:'Verkehrszeichen',notes:'مثلث وارونه — سفید با لبه قرمز'},
+{id:'f_vz_05',de:'Stoppschild',fa:'تابلوی ایست',pro:'ˈʃtɔpˌʃɪlt',type:'fuhrerschein',level:'all',cat:'Verkehrszeichen',notes:'هشت‌ضلعی قرمز — توقف کامل اجباری'},
+{id:'f_vz_06',de:'Einfahrt verboten',fa:'ورود ممنوع',pro:'ˈaɪnˌfaːɐt fɛɐˈboːtən',type:'fuhrerschein',level:'all',cat:'Verkehrszeichen',notes:'دایره قرمز با نوار سفید'},
+{id:'f_vz_07',de:'Überholverbot',fa:'سبقت ممنوع',pro:'ˈyːbɐˌhoːlfɛɐˌboːt',type:'fuhrerschein',level:'all',cat:'Verkehrszeichen',notes:'دو ماشین — سیاه و قرمز'},
+{id:'f_vz_08',de:'Halteverbot',fa:'توقف ممنوع',pro:'ˈhaltəfɛɐˌboːt',type:'fuhrerschein',level:'all',cat:'Verkehrszeichen',notes:'دایره با خط قرمز مایل'},
+{id:'f_vz_09',de:'Parkverbot',fa:'پارک ممنوع',pro:'ˈpaʁkfɛɐˌboːt',type:'fuhrerschein',level:'all',cat:'Verkehrszeichen',notes:'فقط توقف کوتاه برای سوار/پیاده مجاز'},
+{id:'f_vz_10',de:'Eingeschränktes Halteverbot',fa:'توقف محدود',pro:'ˈaɪngəˌʃʁɛŋktəs ˈhaltəfɛɐˌboːt',type:'fuhrerschein',level:'all',cat:'Verkehrszeichen',notes:'با تابلوی اضافی — زمان مشخص'},
+{id:'f_vz_11',de:'Fußgängerzone',fa:'منطقه عابر پیاده',pro:'ˈfuːsgɛŋɐˌtsoːnə',type:'fuhrerschein',level:'all',cat:'Verkehrszeichen',notes:'خودروها مجاز نیستند'},
+{id:'f_vz_12',de:'Tempo-30-Zone',fa:'منطقه ۳۰',pro:'ˈtɛmpo dʁaɪsɪç ˈtsoːnə',type:'fuhrerschein',level:'all',cat:'Verkehrszeichen',notes:'حداکثر سرعت ۳۰ کیلومتر'},
+{id:'f_vz_13',de:'Verkehrsberuhigter Bereich',fa:'منطقه آرام ترافیکی — ۷ کم/س',pro:'fɛɐˈkeːɐsbəˌʁuːɪçtɐ bəˈʁaɪç',type:'fuhrerschein',level:'all',cat:'Verkehrszeichen',notes:'سرعت گام‌به‌گام — عابران اولویت دارند'},
+{id:'f_vz_14',de:'Autobahn (Schild)',fa:'تابلوی اتوبان',pro:'ˈaʊtoˌbaːn',type:'fuhrerschein',level:'all',cat:'Verkehrszeichen',notes:'تابلوی آبی با نماد اتوبان'},
+{id:'f_vz_15',de:'Ortseingang / Ortsausgang',fa:'ورودی / خروجی شهر',pro:'ˈɔʁtsˈaɪŋgaŋ / ˈɔʁtsˈaʊsgaŋ',type:'fuhrerschein',level:'all',cat:'Verkehrszeichen',notes:'تابلوی زرد / خط قرمز مایل'},
+{id:'f_vo_01',de:'rechts vor links',fa:'راست بر چپ — قانون پایه',pro:'ʁɛçts foːɐ lɪŋks',type:'fuhrerschein',level:'all',cat:'Vorfahrt',notes:'در تقاطع‌های بدون تابلو'},
+{id:'f_vo_02',de:'Vorfahrtsstraße',fa:'جاده اصلی',pro:'ˈfoːɐfaːɐtsˌʃtʁaːsə',type:'fuhrerschein',level:'all',cat:'Vorfahrt',notes:'تابلوی زرد لوزی — حق تقدم دارد'},
+{id:'f_vo_03',de:'Vorfahrt gewähren (Regel)',fa:'حق تقدم بدهید — قانون',pro:'ˈfoːɐfaːɐt gəˈvɛːʁən',type:'fuhrerschein',level:'all',cat:'Vorfahrt',notes:'باید منتظر بماند تا جاده آزاد شود'},
+{id:'f_vo_04',de:'Kreisverkehr',fa:'میدان — ماشین‌های داخل حق تقدم دارند',pro:'ˈkʁaɪsfɛɐˌkeːɐ',type:'fuhrerschein',level:'all',cat:'Vorfahrt',notes:''},
+{id:'f_vo_05',de:'Gleichrangige Straße',fa:'جاده هم‌رتبه — قانون راست',pro:'ˈglaɪçˌʁaŋɪgə ˈʃtʁaːsə',type:'fuhrerschein',level:'all',cat:'Vorfahrt',notes:''},
+{id:'f_ge_01',de:'Innerorts — 50 km/h',fa:'داخل شهر — ۵۰ کیلومتر',pro:'ˈɪnɐˌɔʁts',type:'fuhrerschein',level:'all',cat:'Geschwindigkeit',notes:'حداکثر سرعت مجاز داخل شهر'},
+{id:'f_ge_02',de:'Außerorts — 100 km/h',fa:'خارج شهر — ۱۰۰ کیلومتر',pro:'ˈaʊsɐˌɔʁts',type:'fuhrerschein',level:'all',cat:'Geschwindigkeit',notes:'برای سواری‌ها'},
+{id:'f_ge_03',de:'Richtgeschwindigkeit Autobahn 130',fa:'سرعت توصیه‌شده اتوبان ۱۳۰',pro:'ˈʁɪçtgəˌʃvɪndɪçkaɪt',type:'fuhrerschein',level:'all',cat:'Geschwindigkeit',notes:'توصیه‌شده، نه اجباری'},
+{id:'f_ge_04',de:'Schrittgeschwindigkeit — 7 km/h',fa:'سرعت قدم‌به‌قدم — ۷ کم/س',pro:'ˈʃʁɪtgəˌʃvɪndɪçkaɪt',type:'fuhrerschein',level:'all',cat:'Geschwindigkeit',notes:'در مناطق آرام ترافیکی'},
+{id:'f_ge_05',de:'Mindestgeschwindigkeit',fa:'حداقل سرعت',pro:'ˈmɪndəstgəˌʃvɪndɪçkaɪt',type:'fuhrerschein',level:'all',cat:'Geschwindigkeit',notes:'تابلوی آبی با عدد'},
+{id:'f_ab_01',de:'Reaktionsweg = (v/10) × 3',fa:'مسافت واکنش = (سرعت÷۱۰)×۳',pro:'ʁeakˈtsoːnsvek',type:'fuhrerschein',level:'all',cat:'Abstände',notes:'در ۱ ثانیه واکنش'},
+{id:'f_ab_02',de:'Bremsweg = (v/10)²',fa:'مسافت ترمز = (سرعت÷۱۰)²',pro:'ˈbʁɛmsvek',type:'fuhrerschein',level:'all',cat:'Abstände',notes:'فرمول ترمزگیری عادی'},
+{id:'f_ab_03',de:'Anhalteweg = Reaktionsweg + Bremsweg',fa:'مسافت توقف = واکنش + ترمز',pro:'ˈanˌhaltevek',type:'fuhrerschein',level:'all',cat:'Abstände',notes:''},
+{id:'f_ab_04',de:'Sicherheitsabstand — halber Tacho',fa:'فاصله ایمنی — نصف عدد سرعت‌سنج (متر)',pro:'ˈzɪçɐhaɪtsˌapˌstant',type:'fuhrerschein',level:'all',cat:'Abstände',notes:'قانون سرانگشتی'},
+{id:'f_ue_01',de:'links überholen',fa:'سبقت از سمت چپ',pro:'lɪŋks ˈyːbɐˌhoːlən',type:'fuhrerschein',level:'all',cat:'Überholen',notes:'در آلمان فقط از چپ'},
+{id:'f_ue_02',de:'rechts überholen verboten',fa:'سبقت از راست ممنوع',pro:'ʁɛçts ˈyːbɐˌhoːlən fɛɐˈboːtən',type:'fuhrerschein',level:'all',cat:'Überholen',notes:''},
+{id:'f_ue_03',de:'Seitenabstand 1,5 Meter',fa:'فاصله جانبی ۱.۵ متر از دوچرخه',pro:'ˈzaɪtənˌapˌstant',type:'fuhrerschein',level:'all',cat:'Überholen',notes:'حداقل هنگام سبقت'},
+{id:'f_pa_01',de:'Abstand Kreuzung 5 m',fa:'۵ متر از تقاطع',pro:'ˈapˌstant ˈkʁɔɪtsʊŋ',type:'fuhrerschein',level:'all',cat:'Parken',notes:'پارک در فاصله کمتر ممنوع'},
+{id:'f_pa_02',de:'Abstand Fußgängerüberweg 5 m',fa:'۵ متر از خط عابر',pro:'ˈapˌstant ˈfuːsgɛŋɐˌʔyːbɐveːk',type:'fuhrerschein',level:'all',cat:'Parken',notes:'قبل و بعد'},
+{id:'f_pa_03',de:'Abstand Bushaltestelle 15 m',fa:'۱۵ متر از ایستگاه اتوبوس',pro:'ˈapˌstant ˈbʊsˌhaltəˌʃtɛlə',type:'fuhrerschein',level:'all',cat:'Parken',notes:''},
+{id:'f_pa_04',de:'Parkscheibe',fa:'دیسک پارک',pro:'ˈpaʁkˌʃaɪbə',type:'fuhrerschein',level:'all',cat:'Parken',notes:'ساعت ورود را تنظیم می‌کنید'},
+{id:'f_al_01',de:'0,0 Promille — Fahranfänger',fa:'صفر پرومیل — راننده تازه‌کار و زیر ۲۱',pro:'nʊl kɔmə nʊl pʁoˈmɪlə',type:'fuhrerschein',level:'all',cat:'Alkohol',notes:'در ۲ سال اول — هیچ الکلی مجاز نیست'},
+{id:'f_al_02',de:'0,5 Promille — allgemeine Grenze',fa:'۰.۵ پرومیل — حد عمومی',pro:'nʊl kɔmə fʏnf pʁoˈmɪlə',type:'fuhrerschein',level:'all',cat:'Alkohol',notes:'برای رانندگان معمولی'},
+{id:'f_al_03',de:'1,6 Promille — absolute Fahruntüchtigkeit',fa:'۱.۶ پرومیل — ناتوانی مطلق',pro:'aɪns kɔmə zɛks pʁoˈmɪlə',type:'fuhrerschein',level:'all',cat:'Alkohol',notes:'MPU اجباری'},
+{id:'f_al_04',de:'Führerschein auf Probe — 2 Jahre',fa:'گواهینامه آزمایشی — ۲ سال',pro:'ˈfyːʁɐˌʃaɪn aʊf ˈpʁoːbə',type:'fuhrerschein',level:'all',cat:'Alkohol',notes:''},
+{id:'f_al_05',de:'MPU — Medizinisch-Psychologische Untersuchung',fa:'آزمایش پزشکی-روانشناختی',pro:'ɛmpeːˈʔuː',type:'fuhrerschein',level:'all',cat:'Alkohol',notes:'اجباری بعد از لغو گواهینامه'},
+{id:'f_fk_01',de:'Abblendlicht',fa:'چراغ نزدیک',pro:'ˈapˌblɛntlɪçt',type:'fuhrerschein',level:'all',cat:'Fahrzeugkunde',notes:'در تاریکی، داخل شهر، تونل'},
+{id:'f_fk_02',de:'Fernlicht',fa:'چراغ دور',pro:'ˈfɛʁnlɪçt',type:'fuhrerschein',level:'all',cat:'Fahrzeugkunde',notes:'فقط جاده‌های خلوت'},
+{id:'f_fk_03',de:'Nebelschlussleuchte',fa:'چراغ مه عقب',pro:'ˈneːbəlˌʃlʊsˌlɔɪçtə',type:'fuhrerschein',level:'all',cat:'Fahrzeugkunde',notes:'فقط دید کمتر از ۵۰ متر'},
+{id:'f_fk_04',de:'Warnblinkanlage',fa:'چراغ خطر — چهار راهنما',pro:'ˈvaʁnˌblɪŋkˌanˌlaːgə',type:'fuhrerschein',level:'all',cat:'Fahrzeugkunde',notes:'در خرابی، تصادف، ترمز اضطراری'},
+{id:'f_fk_05',de:'Reifenprofil — mindestens 1,6 mm',fa:'عمق آج لاستیک — حداقل ۱.۶ میلیمتر',pro:'ˈʁaɪfənˌpʁoˌfiːl',type:'fuhrerschein',level:'all',cat:'Fahrzeugkunde',notes:''},
+{id:'f_fk_06',de:'ABS — Antiblockiersystem',fa:'سیستم ضد قفل ترمز',pro:'aːbeːˈɛs',type:'fuhrerschein',level:'all',cat:'Fahrzeugkunde',notes:'مانع قفل چرخ‌ها'},
+{id:'f_fk_07',de:'ESP — Elektronisches Stabilitätsprogramm',fa:'سیستم پایداری الکترونیکی',pro:'eːɛsˈpeː',type:'fuhrerschein',level:'all',cat:'Fahrzeugkunde',notes:'جلوگیری از لیز خوردن'},
+{id:'f_eh_01',de:'Notruf 112',fa:'شماره اضطراری ۱۱۲',pro:'ˈnoːtˌʁuːf',type:'fuhrerschein',level:'all',cat:'Erste Hilfe',notes:'آمبولانس و آتش‌نشانی'},
+{id:'f_eh_02',de:'Notruf 110 — Polizei',fa:'پلیس ۱۱۰',pro:'hundɐtˈtseːn',type:'fuhrerschein',level:'all',cat:'Erste Hilfe',notes:''},
+{id:'f_eh_03',de:'Rettungsgasse bilden',fa:'ایجاد خط نجات',pro:'ˈʁɛtʊŋsˌgasə',type:'fuhrerschein',level:'all',cat:'Erste Hilfe',notes:'چپ به چپ، بقیه به راست'},
+{id:'f_eh_04',de:'Warndreieck — 50/100/200 m',fa:'مثلث خطر — ۵۰/۱۰۰/۲۰۰ متر',pro:'ˈvaʁnˌdʁaɪɛk',type:'fuhrerschein',level:'all',cat:'Erste Hilfe',notes:'شهر/جاده/اتوبان'},
+{id:'f_eh_05',de:'Unterlassene Hilfeleistung',fa:'ترک صحنه — جرم کیفری',pro:'ʊntɛɐˈlasənə ˈhɪlfəˌlaɪstʊŋ',type:'fuhrerschein',level:'all',cat:'Erste Hilfe',notes:'در آلمان جرم است'},
+{id:'f_eh_06',de:'Stabile Seitenlage',fa:'وضعیت بهبودی — پهلو',pro:'ʃtaˈbiːlə ˈzaɪtənˌlaːgə',type:'fuhrerschein',level:'all',cat:'Erste Hilfe',notes:'برای بیهوش با نفس'},
+{id:'f_um_01',de:'Umweltplakette',fa:'برچسب محیط‌زیستی',pro:'ˈʊmvɛltˌplaˌkɛtə',type:'fuhrerschein',level:'all',cat:'Umwelt',notes:'سبز = یورو ۴ به بالا'},
+{id:'f_um_02',de:'Umweltzone',fa:'منطقه محیط‌زیستی',pro:'ˈʊmvɛltˌtsoːnə',type:'fuhrerschein',level:'all',cat:'Umwelt',notes:'فقط با برچسب معتبر'},
+{id:'f_um_03',de:'Vorausschauendes Fahren',fa:'رانندگی پیش‌نگر',pro:'foːɐˈaʊsˌʃaʊəndəs ˈfaːʁən',type:'fuhrerschein',level:'all',cat:'Umwelt',notes:'کاهش ترمز و شتاب‌گیری'},
+{id:'f_au_01',de:'Auffahrt / Einfahrt',fa:'ورودی اتوبان',pro:'ˈaʊfˌfaːɐt',type:'fuhrerschein',level:'all',cat:'Autobahn',notes:'سرعت را قبل از ادغام تنظیم کنید'},
+{id:'f_au_02',de:'Ausfahrt',fa:'خروجی اتوبان',pro:'ˈaʊsˌfaːɐt',type:'fuhrerschein',level:'all',cat:'Autobahn',notes:''},
+{id:'f_au_03',de:'Reißverschlussverfahren',fa:'روش فنر قیچی — یکی در میان',pro:'ˈʁaɪsfɛɐˌʃlʊsfɛɐˌfaːʁən',type:'fuhrerschein',level:'all',cat:'Autobahn',notes:'در تنگ شدن جاده'},
+{id:'f_au_04',de:'Standstreifen / Pannenstreifen',fa:'شانه اضطراری',pro:'ˈʃtantˌʃtʁaɪfən',type:'fuhrerschein',level:'all',cat:'Autobahn',notes:'فقط در اضطرار'},
+{id:'f_au_05',de:'Mindestgeschwindigkeit 60 km/h',fa:'حداقل سرعت اتوبان ۶۰',pro:'ˈmɪndəstgəˌʃvɪndɪçkaɪt',type:'fuhrerschein',level:'all',cat:'Autobahn',notes:''},
+{id:'f_au_06',de:'Halten auf Autobahn verboten',fa:'توقف روی اتوبان ممنوع',pro:'ˈhaltən aʊf deːɐ ˈaʊtoˌbaːn',type:'fuhrerschein',level:'all',cat:'Autobahn',notes:'جز اضطرار واقعی'},
+{id:'f_wb_01',de:'Führerschein / Fahrerlaubnis',fa:'گواهینامه رانندگی',pro:'ˈfyːʁɐˌʃaɪn',type:'fuhrerschein',level:'all',cat:'Begriffe',notes:'Fahrerlaubnis = اصطلاح قانونی'},
+{id:'f_wb_02',de:'Fahrzeugschein — Zulassung',fa:'برگ مشخصات خودرو',pro:'ˈfaːɐtsɔɪkˌʃaɪn',type:'fuhrerschein',level:'all',cat:'Begriffe',notes:'باید همیشه همراه داشته باشید'},
+{id:'f_wb_03',de:'HU — Hauptuntersuchung (alle 2 Jahre)',fa:'معاینه فنی اصلی (هر ۲ سال)',pro:'haːptˈʊntɐˌzuːxʊŋ',type:'fuhrerschein',level:'all',cat:'Begriffe',notes:'TÜV یا DEKRA'},
+{id:'f_wb_04',de:'Punkte in Flensburg — max. 8',fa:'امتیاز منفی فلنسبورگ — حداکثر ۸',pro:'ˈpʊŋktə ɪn ˈflɛnsbʊʁk',type:'fuhrerschein',level:'all',cat:'Begriffe',notes:'۸ = لغو گواهینامه'},
+{id:'f_wb_05',de:'Bußgeld',fa:'جریمه نقدی',pro:'ˈbuːsgɛlt',type:'fuhrerschein',level:'all',cat:'Begriffe',notes:''},
+{id:'f_wb_06',de:'Fahrverbot',fa:'ممنوعیت موقت رانندگی',pro:'ˈfaːɐfɛɐˌboːt',type:'fuhrerschein',level:'all',cat:'Begriffe',notes:'یک تا سه ماه'},
+{id:'f_wb_07',de:'Geisterfahrer',fa:'راننده معکوس روی اتوبان',pro:'ˈgaɪstɐˌfaːʁɐ',type:'fuhrerschein',level:'all',cat:'Begriffe',notes:'خطرناک‌ترین خطا'},
+{id:'f_wb_08',de:'Kfz-Haftpflichtversicherung',fa:'بیمه اجباری مسئولیت مدنی',pro:'kaːfauˈtsɛt haftˌpflɪçtfɛɐˌzɪçɐʊŋ',type:'fuhrerschein',level:'all',cat:'Begriffe',notes:'اجباری برای همه خودروها'},
+
+]; // end VOCAB
+
+// ═══════════════════════════════════════════
+//  PART 5 — PROGRESS PAGE
+// ═══════════════════════════════════════════
+
+(function injectProgressCSS(){
+  if(document.getElementById('prog-css')) return;
+  const s = document.createElement('style');
+  s.id = 'prog-css';
+  s.textContent = `
+.prog-page{padding:0 0 16px}
+.prog-hero{background:linear-gradient(135deg,var(--c-primary-d),var(--c-primary));padding:28px 20px 36px;color:#fff;text-align:center}
+.prog-hero-num{font-size:72px;font-weight:900;line-height:1;font-family:var(--font-de);letter-spacing:-2px}
+.prog-hero-label{font-size:14px;opacity:.85;margin-top:4px}
+.prog-hero-sub{font-size:12px;opacity:.65;margin-top:6px}
+.prog-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:16px;margin-top:-16px}
+.prog-mini{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-md);padding:14px;box-shadow:var(--shadow);text-align:center}
+.prog-mini-val{font-size:28px;font-weight:900;font-family:var(--font-de);color:var(--c-primary)}
+.prog-mini-lbl{font-size:11px;color:var(--txt-3);margin-top:3px;font-weight:600}
+.prog-section{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-md);margin:0 16px 12px;box-shadow:var(--shadow);overflow:hidden}
+.prog-section-hdr{padding:14px 16px 10px;font-size:14px;font-weight:800;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
+.prog-section-body{padding:14px 16px}
+.cat-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.cat-bar-row:last-child{margin-bottom:0}
+.cbl{font-size:12px;font-weight:700;width:80px;flex-shrink:0;text-align:right;color:var(--txt-2)}
+.cbr{flex:1}
+.cb{height:10px;background:var(--bg-input);border-radius:20px;overflow:hidden}
+.cb-fill{height:100%;border-radius:20px;transition:width .8s cubic-bezier(.4,0,.2,1)}
+.cb-pct{font-size:11px;font-weight:700;color:var(--txt-3);margin-top:3px;font-family:var(--font-de)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-top:8px}
+.cal-cell{aspect-ratio:1;border-radius:3px;background:var(--bg-input)}
+.cal-cell.a1{background:var(--c-primary-l);opacity:.3}
+.cal-cell.a2{background:var(--c-primary-l);opacity:.65}
+.cal-cell.a3{background:var(--c-primary)}
+.cal-cell.today{outline:2px solid var(--c-accent);outline-offset:1px}
+.cal-legend{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:10px;color:var(--txt-3);justify-content:flex-end}
+.cal-legend-cell{width:12px;height:12px;border-radius:2px}
+.streak-ring-wrap{display:flex;align-items:center;gap:16px}
+.streak-ring{width:80px;height:80px;position:relative;flex-shrink:0}
+.streak-ring svg{transform:rotate(-90deg)}
+.streak-ring-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.sr-num{font-size:22px;font-weight:900;color:var(--c-primary);font-family:var(--font-de);line-height:1}
+.sr-lbl{font-size:9px;color:var(--txt-3);font-weight:700}
+.streak-ring-info{flex:1}
+.sri-row{display:flex;justify-content:space-between;margin-bottom:8px}
+.sri-item{text-align:center}
+.sri-val{font-size:20px;font-weight:800;color:var(--txt);font-family:var(--font-de)}
+.sri-lbl{font-size:10px;color:var(--txt-3);font-weight:600}
+.roadmap{display:flex;align-items:center;gap:0;padding:8px 0}
+.rm-node{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1}
+.rm-circle{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;font-family:var(--font-de);border:2px solid var(--border);color:var(--txt-3);background:var(--bg-input);transition:all .3s}
+.rm-circle.done{background:var(--c-primary);color:#fff;border-color:var(--c-primary)}
+.rm-circle.current{background:var(--c-accent);color:#fff;border-color:var(--c-accent);box-shadow:0 0 0 4px rgba(244,162,97,.25)}
+.rm-lbl{font-size:10px;color:var(--txt-3);font-weight:600}
+.rm-line{flex:1;height:2px;background:var(--border);margin-bottom:16px}
+.rm-line.done{background:var(--c-primary)}
+  `;
+  document.head.appendChild(s);
+})();
+
+function renderProgressContent(el) {
+  injectProgressCSS();
+  const total    = S.VOCAB.length;
+  const learned  = learnedCount();
+  const mastered = masteredCount();
+  const due      = dueCount();
+  const days     = S.activeDays.length;
+  const pct      = total ? Math.round(learned/total*100) : 0;
+  const CATS = [
+    {type:'grammar',fa:'گرامر',color:'#2D6A4F'},
+    {type:'hoch',fa:'Hochdeutsch',color:'#457B9D'},
+    {type:'umgang',fa:'Umgangssprache',color:'#E76F51'},
+    {type:'fuhrerschein',fa:'گواهینامه',color:'#F4A261'},
+  ];
+  const calCells = [];
+  for(let i=27;i>=0;i--){
+    const d=new Date();d.setDate(d.getDate()-i);
+    const ds=d.toISOString().slice(0,10);
+    calCells.push({ds,isToday:ds===todayStr(),active:S.activeDays.includes(ds)});
+  }
+  const r=34,circ=2*Math.PI*r;
+  const dash=Math.min(100,(S.streak/30)*100)/100*circ;
+  const levels=['B1','B2','C1','C2'];
+  const curIdx=['b1','b2','c1','c2'].indexOf(S.level);
+  el.innerHTML=`
+<div class="prog-page">
+  <div class="prog-hero">
+    <div class="prog-hero-num">${learned}</div>
+    <div class="prog-hero-label">واژه یاد گرفته از ${total}</div>
+    <div class="prog-hero-sub">${pct}% کل محتوا · ${mastered} تسلط کامل</div>
+  </div>
+  <div class="prog-cards">
+    <div class="prog-mini"><div class="prog-mini-val" style="color:#E76F51">${due}</div><div class="prog-mini-lbl">برای مرور امروز</div></div>
+    <div class="prog-mini"><div class="prog-mini-val" style="color:#457B9D">${days}</div><div class="prog-mini-lbl">روز فعال</div></div>
+    <div class="prog-mini"><div class="prog-mini-val" style="color:#9B59B6">${mastered}</div><div class="prog-mini-lbl">تسلط کامل</div></div>
+    <div class="prog-mini"><div class="prog-mini-val">${total-learned}</div><div class="prog-mini-lbl">باقی‌مانده</div></div>
+  </div>
+  <div class="prog-section">
+    <div class="prog-section-hdr">🔥 استریک</div>
+    <div class="prog-section-body">
+      <div class="streak-ring-wrap">
+        <div class="streak-ring">
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <circle cx="40" cy="40" r="${r}" fill="none" stroke="var(--bg-input)" stroke-width="7"/>
+            <circle cx="40" cy="40" r="${r}" fill="none" stroke="var(--c-primary)" stroke-width="7"
+              stroke-dasharray="${dash.toFixed(1)} ${circ.toFixed(1)}" stroke-linecap="round"/>
+          </svg>
+          <div class="streak-ring-num"><div class="sr-num">${S.streak}</div><div class="sr-lbl">روز</div></div>
+        </div>
+        <div class="streak-ring-info">
+          <div class="sri-row">
+            <div class="sri-item"><div class="sri-val">${S.streak}</div><div class="sri-lbl">استریک</div></div>
+            <div class="sri-item"><div class="sri-val">${days}</div><div class="sri-lbl">کل روز</div></div>
+            <div class="sri-item"><div class="sri-val">${S.goal}</div><div class="sri-lbl">هدف</div></div>
+          </div>
+          <div class="prog-bar"><div class="prog-fill" style="width:${Math.min(100,S.sessionDone/S.goal*100)}%"></div></div>
+          <div style="font-size:11px;color:var(--txt-3);margin-top:4px">امروز: ${Math.min(S.sessionDone,S.goal)}/${S.goal}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="prog-section">
+    <div class="prog-section-hdr">📊 پیشرفت بر اساس دسته</div>
+    <div class="prog-section-body">
+      ${CATS.map(c=>{const t=S.VOCAB.filter(v=>v.type===c.type).length;const d=learnedCount(c.type);const p=t?Math.round(d/t*100):0;return`<div class="cat-bar-row"><div class="cbl">${c.fa}</div><div class="cbr"><div class="cb"><div class="cb-fill" style="width:${p}%;background:${c.color}"></div></div><div class="cb-pct">${d}/${t} (${p}%)</div></div></div>`;}).join('')}
+    </div>
+  </div>
+  <div class="prog-section">
+    <div class="prog-section-hdr">📅 فعالیت ۲۸ روز اخیر</div>
+    <div class="prog-section-body">
+      <div class="cal-grid">
+        ${calCells.map(c=>{const cls=c.active?(c.isToday?'a3':'a2'):(c.isToday?'today':'');return`<div class="cal-cell ${cls}" title="${c.ds}"></div>`;}).join('')}
+      </div>
+      <div class="cal-legend"><span>کم</span><div class="cal-legend-cell" style="background:var(--bg-input)"></div><div class="cal-legend-cell cal-cell a1"></div><div class="cal-legend-cell cal-cell a2"></div><div class="cal-legend-cell cal-cell a3"></div><span>زیاد</span></div>
+    </div>
+  </div>
+  <div class="prog-section">
+    <div class="prog-section-hdr">🗺️ مسیر یادگیری</div>
+    <div class="prog-section-body">
+      <div class="roadmap">
+        ${levels.map((lv,i)=>{const isDone=i<curIdx;const isCur=i===curIdx;const isLast=i===levels.length-1;return`<div class="rm-node"><div class="rm-circle ${isDone?'done':isCur?'current':''}">${lv}</div><div class="rm-lbl">${isDone?'✓':isCur?'الان':''}</div></div>${!isLast?`<div class="rm-line ${isDone?'done':''}"></div>`:''}`}).join('')}
+      </div>
+      <div style="text-align:center;margin-top:8px">
+        <button class="btn btn-outline btn-sm" onclick="navigate('settings')">تغییر سطح ⚙️</button>
+      </div>
+    </div>
+  </div>
+  <div style="padding:0 16px">
+    <button class="btn btn-primary btn-full" onclick="navigate('practice','srs')">🔄 مرور هوشمند (${due} کارت)</button>
+  </div>
+</div>`;
+}
+
+// ── INIT ──
+loadState();
+applyTheme();
+syncSettings();
+renderHome();
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+</script>
+</body>
+</html>

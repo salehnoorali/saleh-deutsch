@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <rect width="192" height="192" rx="36" fill="#1B4332"/>
+  <rect x="16" y="16" width="160" height="160" rx="24" fill="#2D6A4F"/>
+  <text x="96" y="78" text-anchor="middle" font-size="48" font-family="Georgia,serif" fill="#F4A261" font-weight="bold">DE</text>
+  <text x="96" y="118" text-anchor="middle" font-size="22" font-family="Tahoma,Arial" fill="#B7E4C7">یادگیری</text>
+  <text x="96" y="148" text-anchor="middle" font-size="14" font-family="Georgia,serif" fill="#52B788" letter-spacing="2">آلمانی</text>
+</svg>
